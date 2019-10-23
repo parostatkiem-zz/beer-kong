@@ -11,6 +11,8 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
+
+import GoogleLogin from 'react-google-login';
 // sections for this page
 import HeaderLinks from "components/Header/HeaderLinks.js";
 
@@ -21,6 +23,8 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
 
+import TopHeader from 'components/TopHeader/TopHeader'
+
 const useStyles = makeStyles(styles);
 
 export default function Components(props) {
@@ -28,30 +32,8 @@ export default function Components(props) {
   const { ...rest } = props;
   return (
     <div>
-      <Header
-        brand="Beer kong"
-        rightLinks={<HeaderLinks />}
-        fixed
-        color="transparent"
-        changeColorOnScroll={{
-          height: 400,
-          color: "black"
-        }}
-        {...rest}
-      />
-      <Parallax image={require("assets/img/bg.jpg")}>
-        <div className={classes.container}>
-          <GridContainer>
-            <GridItem>
-              <div className={classes.brand}>
-                <h1 className={classes.title}>Beer kong</h1>
-                <h3 className={classes.subtitle}>Pograj se, napij się.</h3>
-              </div>
-            </GridItem>
-          </GridContainer>
-        </div>
-      </Parallax>
 
+      <TopHeader />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <h2>Stara Filipa</h2>
         <CustomTabs
