@@ -3,7 +3,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import Header from 'components/Header/Header'
 import Button from 'components/CustomButtons/Button'
 import UserInfoContext from 'contexts/UserInfoContext/UserInfo.context';
-
+import UserDisplay from './UserDisplay/UserDisplay'
 
 
 
@@ -48,12 +48,17 @@ const TopHeader = () => {
             color: "primary"
         }}
         rightLinks={
-            <LoginLogoutButtons
-                onResponse={responseGoogle}
-                onLogout={logout}
-                isLoggedIn={!!userInfo}
+            <>
+                {userInfo && <UserDisplay
+                    image={userInfo.profileObj.imageUrl}
+                    name={`${userInfo.profileObj.givenName} ${userInfo.profileObj.familyName}`} />}
+                <LoginLogoutButtons
+                    onResponse={responseGoogle}
+                    onLogout={logout}
+                    isLoggedIn={!!userInfo}
 
-                clientId="315865323177-9860safp7u33rghq3l7v7sbqppdjs4vu.apps.googleusercontent.com" />
+                    clientId="315865323177-9860safp7u33rghq3l7v7sbqppdjs4vu.apps.googleusercontent.com" />
+            </>
         }
     >
     </Header>

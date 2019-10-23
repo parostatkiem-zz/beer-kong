@@ -15,7 +15,7 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
 
-import TopHeader from 'components/TopHeader/TopHeader'
+import TopHeader from 'components/Header/TopHeader/TopHeader'
 
 const useStyles = makeStyles(styles);
 
