@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import Header from 'components/Header/Header'
-
+import Button from 'components/CustomButtons/Button'
 
 
 function responseGoogle(resp) {
@@ -16,9 +16,8 @@ const LoginLogoutButtons = ({ clientId }) => <>
     <GoogleLogin
         clientId={clientId}
         render={renderProps => (
-            <button onClick={renderProps.onClick} disabled={renderProps.disabled}>Login</button>
+            <Button color="primary" onClick={renderProps.onClick} disabled={renderProps.disabled}>Login</Button>
         )}
-
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
@@ -28,7 +27,7 @@ const LoginLogoutButtons = ({ clientId }) => <>
 
         onLogoutSuccess={logout}
         render={renderProps => (
-            <button onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</button>
+            <Button onClick={renderProps.onClick} disabled={renderProps.disabled}>Logout</Button>
         )}
     >
     </GoogleLogout>
