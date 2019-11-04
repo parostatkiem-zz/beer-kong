@@ -27,24 +27,24 @@ export default function Components(props) {
 
       <TopHeader />
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <h2>Stara Filipa</h2>
+        <h2>Ogromna małpa</h2>
         <CustomTabs
           headerColor="danger"
           tabs={[
             {
               tabName: "Jest",
               tabIcon: Face,
-              tabContent: <h1>Gruba</h1>
+              tabContent: <h1>P O T Ę Ż N A</h1>
             },
             {
-              tabName: "Pierdoli",
+              tabName: "Gada",
               tabIcon: Chat,
               tabContent: <h1>Głupoty</h1>
             },
             {
-              tabName: "Zmieści",
+              tabName: "Zje",
               tabIcon: Build,
-              tabContent: <h1>w sobie klucz 32</h1>
+              tabContent: <h1>32 banany</h1>
             }
           ]}
         />
