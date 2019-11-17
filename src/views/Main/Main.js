@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Footer from "components/Footer/Footer.js";
 
-
 import Face from "@material-ui/icons/Face";
 import Chat from "@material-ui/icons/Chat";
 import Build from "@material-ui/icons/Build";
@@ -15,17 +14,36 @@ import CustomTabs from "components/CustomTabs/CustomTabs.js";
 
 import styles from "assets/jss/material-kit-react/views/components.js";
 
-import TopHeader from 'components/Header/TopHeader/TopHeader'
+import TopHeader from "components/Header/TopHeader/TopHeader";
+import { useQuery } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+const EXCHANGE_RATES = gql`
+  query findTodos {
+    todos {
+      text
+      done
+      user {
+        name
+      }
+    }
+  }
+`;
 
 const useStyles = makeStyles(styles);
 
 export default function Components(props) {
   const classes = useStyles();
 
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  console.log(data);
   return (
     <div>
-
       <TopHeader />
+
       <div className={classNames(classes.main, classes.mainRaised)}>
         <h2>Ogromna małpa</h2>
         <CustomTabs
