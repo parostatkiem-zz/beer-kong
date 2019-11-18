@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "components/App/App";
+import Router from "components/Router/Router";
 
 import "assets/scss/material-kit-react.scss?v=1.8.0";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { InMemoryCache } from "apollo-cache-inmemory";
-// pages for this product
-
+import { Router as ReactRouter, Route, Switch } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import ApolloClient from "apollo-client";
 
 const httpLink = createHttpLink({
@@ -19,9 +19,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
   const token = localStorage.getItem("token");
-  // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
@@ -35,9 +33,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+var hist = createBrowserHistory();
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <ReactRouter history={hist}>
+      <Router />
+    </ReactRouter>
   </ApolloProvider>,
   document.getElementById("root")
 );
