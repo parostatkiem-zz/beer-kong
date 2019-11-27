@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Router from "components/Router/Router";
 
-import "assets/scss/material-kit-react.scss?v=1.8.0";
+import "assets/vendor/nucleo/css/nucleo.css";
+import "assets/vendor/font-awesome/css/font-awesome.min.css";
+import "assets/scss/argon-design-system-react.scss";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
