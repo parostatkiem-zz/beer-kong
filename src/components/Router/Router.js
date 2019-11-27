@@ -6,6 +6,7 @@ import Main from "views/Main/Main.js";
 // import Profile from "views/Profile/Profile";
 
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
+import TopNav from "components/TopNav/TopNav";
 //import League from "views/League/League";
 
 const Router = () => {
@@ -22,7 +23,7 @@ const Router = () => {
 
   return (
     <UserInfoContext.Provider value={{ userInfo, setUserInfo }}>
-      {/* <TopHeader /> */}
+      <TopNav />
       <Switch>
         <Route exact path="/" component={Main} />
         {/* <Route
