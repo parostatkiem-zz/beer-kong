@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Col, Jumbotron } from "reactstrap";
 import Counter from "components/Counter/Counter";
 import { faChess, faUserAstronaut } from "@fortawesome/free-solid-svg-icons";
+import LeaguesTable from "components/LeaguesTable/LeaguesTable";
 
 export default function Main(props) {
   return (
@@ -25,6 +26,7 @@ export default function Main(props) {
         </Col>
       </Row>
       Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich <br />
+      <LeaguesTable />
       <Link to="/profile/1"> Profil o ID=1</Link>
       <Link to="/league/1"> Liga o ID=1</Link>
     </Container>

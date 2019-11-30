@@ -1,0 +1,19 @@
+.single-league {
+  .info {
+    display: flex;
+
+    flex-direction: column;
+    .description {
+      flex-grow: 1;
+    }
+  }
+
+  .property {
+    display: flex;
+    align-items: center;
+    .text {
+      flex-grow: 1;
+      margin-left: 8px;
+    }
+  }
+}
