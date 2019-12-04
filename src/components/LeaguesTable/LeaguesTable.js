@@ -59,7 +59,7 @@ const LeaguesTable = ({}) => {
   return (
     <>
       {leagues.map(l => (
-        <SingleLeague {...l} />
+        <SingleLeague key={l.name} {...l} />
       ))}
       <nav aria-label="...">
         <Pagination
