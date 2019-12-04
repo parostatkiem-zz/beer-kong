@@ -15,6 +15,7 @@ import {
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import UserDisplay from "./UserDisplay/UserDisplay";
 import { Link } from "react-router-dom";
+import "./TopNav.scss";
 
 const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
   !isLoggedIn ? (
@@ -23,7 +24,7 @@ const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
       render={renderProps => (
         <Button
           className="btn-icon btn-3"
-          color="primary"
+          color="secondary"
           type="button"
           onClick={renderProps.onClick}
           disabled={renderProps.disabled}
@@ -63,7 +64,7 @@ const TopNav = () => {
   }
 
   return (
-    <Navbar className="navbar-dark bg-default" expand="lg">
+    <Navbar className="navbar-dark bg-primary navbar-horizontal" expand="lg">
       <Container>
         <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
           Beer Kong
@@ -107,16 +108,6 @@ const TopNav = () => {
                 clientId="315865323177-9860safp7u33rghq3l7v7sbqppdjs4vu.apps.googleusercontent.com"
               />
             </NavItem>
-            {/* <NavItem>
-              <NavLink
-                className="nav-link-icon"
-                href="#pablo"
-                onClick={e => e.preventDefault()}
-              >
-                <i className="ni ni-notification-70" />
-                <span className="nav-link-inner--text d-lg-none">Profile</span>
-              </NavLink>
-            </NavItem> */}
           </Nav>
         </UncontrolledCollapse>
       </Container>
