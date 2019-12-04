@@ -39,9 +39,11 @@ const SingleLeague = ({
       <CardBody className="py-3">
         <Row>
           <Col sm={12} md={8} className="info">
-            <h3 className=" text-primary text-uppercase">{name}</h3>
+            <Link to={"/league/" + id}>
+              <h3 className=" text-primary text-uppercase">{name}</h3>
+            </Link>
             <p className=" description mt-3">{description}</p>
-            <Link to={"/league" + id}>
+            <Link to={"/league/" + id}>
               <Button className="mt-2" color="primary">
                 Zobacz więcej
               </Button>

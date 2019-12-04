@@ -36,8 +36,6 @@ export default function Main(props) {
         />
         <LeaguesTable />
       </section>
-      <Link to="/profile/1"> Profil o ID=1</Link>
-      <Link to="/league/1"> Liga o ID=1</Link>
     </Container>
   );
 }
