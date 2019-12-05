@@ -4,10 +4,10 @@ import { Route, Switch } from "react-router-dom";
 import Main from "views/Main/Main.js";
 // import Footer from "components/Footer/Footer";
 // import Profile from "views/Profile/Profile";
+import League from "../../views/League/League";
 
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import TopNav from "components/TopNav/TopNav";
-//import League from "views/League/League";
 
 const Router = () => {
   const [userInfo, setUserInfoState] = useState(
@@ -29,11 +29,11 @@ const Router = () => {
         {/* <Route
           path="/profile/:id"
           render={props => <Profile id={props.match.params.id} />}
-        />
+        /> */}
         <Route
           path="/league/:id"
           render={props => <League id={props.match.params.id} />}
-        /> */}
+        />
 
         <Route path="*">
           <h1>Chyba zabłądziłeś... 404</h1>

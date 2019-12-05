@@ -1,4 +1,21 @@
 .counter {
+
+  &.size-s {
+    .card-body {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .number {
+      font-size: 3em;
+    }
+  }
+
+  .card-body {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
   .top-row {
     justify-content: center;
     align-items: center;

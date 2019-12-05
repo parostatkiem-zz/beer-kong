@@ -1,0 +1,45 @@
+.jumbotron.match {
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+
+    align-items: center;
+
+    &>span {
+        display: inline-block;
+        font-size: 1.2em;
+
+    }
+
+    .player {
+        width: 50%;
+        padding: 1em;
+
+        &.winner {
+            background-color: #2dce89;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 200px 0 0 200px;
+            border-color: transparent transparent transparent #007bff;
+
+        }
+    }
+
+    .result {
+        display: flex;
+
+        .slash {
+            height: 100%;
+            transform: scaleX(-0.5);
+            font-size: 4em;
+            color:
+                #5e72e4;
+            float: right;
+            overflow: visible;
+        }
+    }
+}

@@ -3,17 +3,30 @@ import { Jumbotron, Card, CardBody, Row, Col } from "reactstrap";
 import "./Counter.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import classNames from "classnames";
 
-const Counter = ({ children, value, icon }) => {
+const Counter = ({ children, value, icon, size = "m" }) => {
   return (
-    <Card className="shadow border-0 counter mb-3">
-      <CardBody className="py-3 ">
+    <Card
+      className={classNames([
+        "shadow",
+        "border-0",
+        "counter",
+        "mb-3",
+        "size-" + size
+      ])}
+    >
+      <CardBody className="">
         <Row className="top-row mx-2">
           <h1 className="number">{value}</h1>
 
           <FontAwesomeIcon className="icon" icon={icon} size="6x" />
         </Row>
-        <h5 className="text-center">{children}</h5>
+        {size === "m" ? (
+          <h5 className="text-center">{children}</h5>
+        ) : (
+          <h6 className="text-center">{children}</h6>
+        )}
       </CardBody>
     </Card>
   );
