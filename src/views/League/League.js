@@ -25,13 +25,45 @@ import {
 import Match from "components/Match/Match";
 import { Link } from "react-router-dom";
 
-const mockMatches = [
+const mockMatchesPlayed = [
   {
     player1: "Jan Kowalski",
     player2: "Filip Strózik",
     date: new Date(2019, 11, 3).toLocaleDateString(),
     winner: 2,
     looserPoints: 6
+  },
+  {
+    player1: "Natalia",
+    player2: "Klaudia",
+    date: new Date(2019, 10, 5).toLocaleDateString(),
+    winner: 1,
+    looserPoints: 7
+  },
+  {
+    player1: "Tobik",
+    player2: "Bunia",
+    date: new Date(2019, 5, 12).toLocaleDateString(),
+    winner: 1,
+    looserPoints: 2
+  }
+];
+
+const mockMatchesUnplayed = [
+  {
+    player1: "Jan Kowalski",
+    player2: "Filip Strózik"
+    //  date: new Date(2019, 11, 3).toLocaleDateString()
+  },
+  {
+    player1: "Natalia",
+    player2: "Klaudia"
+    //  date: new Date(2019, 10, 5).toLocaleDateString()
+  },
+  {
+    player1: "Tobik",
+    player2: "Bunia"
+    // date: new Date(2019, 5, 12).toLocaleDateString()
   }
 ];
 
@@ -84,7 +116,7 @@ const League = ({ id }) => {
           icon={faFutbol}
           // description="Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich"
         />
-        {mockMatches.map(match => (
+        {mockMatchesPlayed.map(match => (
           <Match {...match} />
         ))}
       </section>
@@ -95,6 +127,9 @@ const League = ({ id }) => {
           icon={faBowlingBall}
           // description="Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich"
         />
+        {mockMatchesUnplayed.map(match => (
+          <Match {...match} />
+        ))}
       </section>
     </Container>
   );

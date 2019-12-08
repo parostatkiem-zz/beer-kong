@@ -11,22 +11,30 @@ import {
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
-const Match = ({ player1, player2, date, winner, looserPoints }) => {
+const Match = ({ player1, player2, date, winner = null, looserPoints }) => {
   return (
-    <Jumbotron className="match">
+    <Jumbotron className={classNames("match", { unplayed: winner === null })}>
       <div className={classNames(["player", "left", { winner: winner === 1 }])}>
-        {winner === 1 && <FontAwesomeIcon className="trophy" icon={faTrophy} />}
+        {winner === 1 ? (
+          <FontAwesomeIcon className="trophy" icon={faTrophy} />
+        ) : (
+          <span></span>
+        )}
         <Link>{player1}</Link>
-        <span class="points">10</span>
+        <span class="points">{winner === 1 ? 10 : looserPoints}</span>
       </div>
       <FontAwesomeIcon className="bolt_icon" icon={faBolt} />
       <span className="date">{date}</span>
       <div
         className={classNames(["player", "right", { winner: winner === 2 }])}
       >
-        <span class="points">{looserPoints}</span>
+        <span class="points">{winner === 2 ? 10 : looserPoints}</span>
         <Link>{player2}</Link>
-        {winner === 2 && <FontAwesomeIcon className="trophy" icon={faTrophy} />}
+        {winner === 2 ? (
+          <FontAwesomeIcon className="trophy" icon={faTrophy} />
+        ) : (
+          <span></span>
+        )}
       </div>
     </Jumbotron>
   );

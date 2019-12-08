@@ -9,11 +9,12 @@ const SectionHeader = ({ title, description, icon }) => {
     <>
       <hr className="my-3" />
       <div
+        style={{ alignItems: "end" }}
         className={classNames([
           "d-flex",
-          "pr-3",
-          "justify-content-md-center",
-          { "text-center": !icon }
+          "my-3"
+          //   "justify-content-md-center",
+          //  { "text-center": !icon }
         ])}
       >
         {icon && (
