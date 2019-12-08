@@ -24,7 +24,7 @@ const SectionHeader = ({ title, description, icon }) => {
           </div>
         )}
         <div className="pl-4">
-          <h4 className="display-3 text-white">{title}</h4>
+          <h4 className=" text-white">{title}</h4>
           <p style={{ color: "#e9ecef" }}>{description}</p>
         </div>
       </div>
