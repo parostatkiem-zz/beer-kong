@@ -20,10 +20,13 @@ import SectionHeader from "components/SectionHeader/SectionHeader";
 import {
   faUserAstronaut,
   faFutbol,
-  faBowlingBall
+  faBowlingBall,
+  faUsers,
+  faChess
 } from "@fortawesome/free-solid-svg-icons";
 import Match from "components/Match/Match";
 import { Link } from "react-router-dom";
+import PageHeader from "components/PageHeader/PageHeader";
 
 const mockMatchesPlayed = [
   {
@@ -73,9 +76,9 @@ const League = ({ id }) => {
       <section>
         <Row>
           <Col>
-            <Counter size="s" value="Konarskiego oficjalnie">
-              Przestrzegamy reguł International BeerPong Federation
-            </Counter>
+            <PageHeader icon={faChess} value="Konarskiego oficjalnie">
+              <h6>Przestrzegamy reguł International BeerPong Federation</h6>
+            </PageHeader>
           </Col>
         </Row>
         <Row>

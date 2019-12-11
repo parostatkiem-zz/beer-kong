@@ -66,9 +66,7 @@ const TopNav = () => {
   return (
     <Navbar className="navbar-dark bg-primary navbar-horizontal" expand="lg">
       <Container>
-        <NavbarBrand href="#pablo" onClick={e => e.preventDefault()}>
-          Beer Kong
-        </NavbarBrand>
+        <NavbarBrand href="/">Beer Kong</NavbarBrand>
 
         {userInfo && (
           <UserDisplay

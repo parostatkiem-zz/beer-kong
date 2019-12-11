@@ -20,7 +20,7 @@ const Match = ({ player1, player2, date, winner = null, looserPoints }) => {
         ) : (
           <span></span>
         )}
-        <Link>{player1}</Link>
+        <Link to="/player/1">{player1}</Link>
         <span class="points">{winner === 1 ? 10 : looserPoints}</span>
       </div>
       <FontAwesomeIcon className="bolt_icon" icon={faBolt} />
@@ -29,7 +29,7 @@ const Match = ({ player1, player2, date, winner = null, looserPoints }) => {
         className={classNames(["player", "right", { winner: winner === 2 }])}
       >
         <span class="points">{winner === 2 ? 10 : looserPoints}</span>
-        <Link>{player2}</Link>
+        <Link to="/player/1">{player2}</Link>
         {winner === 2 ? (
           <FontAwesomeIcon className="trophy" icon={faTrophy} />
         ) : (

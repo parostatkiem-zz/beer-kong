@@ -1,0 +1,30 @@
+.page-header {
+    .card-body {
+        padding: 0;
+    }
+
+    .top-row {
+        justify-content: center;
+        align-items: stretch;
+    }
+
+    .icon-column {
+        align-items: center;
+        display: flex;
+        background: #e9ecef;
+        overflow: hidden;
+        margin-left: 15px;
+        border-radius: 0.25rem 0 0 0.25rem;
+    }
+
+    .text-column {
+        padding: 1em 1.5em;
+    }
+
+    .number {
+        color: #fb6340;
+        font-size: 3em;
+        font-weight: bold;
+    }
+
+}

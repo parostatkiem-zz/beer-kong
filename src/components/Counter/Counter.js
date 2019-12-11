@@ -1,8 +1,7 @@
-import React, { Children } from "react";
-import { Jumbotron, Card, CardBody, Row, Col } from "reactstrap";
+import React from "react";
+import { Card, CardBody, Row } from "reactstrap";
 import "./Counter.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
 
 const Counter = ({ children, value, icon, size = "m" }) => {
@@ -19,7 +18,6 @@ const Counter = ({ children, value, icon, size = "m" }) => {
       <CardBody className="">
         <Row className="top-row mx-2">
           <h1 className="number">{value}</h1>
-
           <FontAwesomeIcon className="icon" icon={icon} size="6x" />
         </Row>
         {size === "m" ? (

@@ -8,6 +8,7 @@ import League from "../../views/League/League";
 
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import TopNav from "components/TopNav/TopNav";
+import Player from "views/Player/Player";
 
 const Router = () => {
   const [userInfo, setUserInfoState] = useState(
@@ -26,13 +27,15 @@ const Router = () => {
       <TopNav />
       <Switch>
         <Route exact path="/" component={Main} />
-        {/* <Route
-          path="/profile/:id"
-          render={props => <Profile id={props.match.params.id} />}
-        /> */}
+
         <Route
           path="/league/:id"
           render={props => <League id={props.match.params.id} />}
+        />
+
+        <Route
+          path="/player/:id"
+          render={props => <Player id={props.match.params.id} />}
         />
 
         <Route path="*">
