@@ -58,7 +58,7 @@ const Player = ({ id }) => {
               <ListGroup>
                 <ListGroupItem
                   tag="a"
-                  href="/league/1"
+                  href="/team/1"
                   className="justify-content-between d-flex"
                 >
                   Nygusy z Konarskiego
@@ -66,14 +66,14 @@ const Player = ({ id }) => {
 
                 <ListGroupItem
                   tag="a"
-                  href="/league/1"
+                  href="/team/1"
                   className="justify-content-between d-flex"
                 >
                   Wydział Matematyki Stosowanej
                 </ListGroupItem>
                 <ListGroupItem
                   tag="a"
-                  href="/league/1"
+                  href="/team/1"
                   className="justify-content-between d-flex"
                 >
                   <strong>HGWsuad </strong>
@@ -81,7 +81,7 @@ const Player = ({ id }) => {
                 </ListGroupItem>
                 <ListGroupItem
                   tag="a"
-                  href="/league/1"
+                  href="/team/1"
                   className="justify-content-between d-flex"
                 >
                   Tajemnice Nowogradu

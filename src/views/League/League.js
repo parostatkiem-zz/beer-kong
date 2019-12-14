@@ -113,23 +113,14 @@ const League = ({ id }) => {
         </Row>
       </section>
       <section className="mt-3">
-        <SectionHeader
-          size="s"
-          title="Rozegrane mecze"
-          icon={faFutbol}
-          // description="Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich"
-        />
+        <SectionHeader size="s" title="Rozegrane mecze" icon={faFutbol} />
         {mockMatchesPlayed.map(match => (
           <Match {...match} />
         ))}
       </section>
 
       <section className="mt-3">
-        <SectionHeader
-          title="Planowane mecze"
-          icon={faBowlingBall}
-          // description="Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich"
-        />
+        <SectionHeader title="Planowane mecze" icon={faBowlingBall} />
         {mockMatchesUnplayed.map(match => (
           <Match {...match} />
         ))}
