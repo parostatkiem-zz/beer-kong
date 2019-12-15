@@ -39,7 +39,11 @@ const Player = ({ id }) => {
       <section>
         <Row>
           <Col>
-            <PageHeader icon={faUserAstronaut} value="Filip Strózik">
+            <PageHeader
+              icon={faUserAstronaut}
+              kind="Gracz"
+              value="Filip Strózik"
+            >
               <h6>
                 W piwnej społeczności od{" "}
                 <Badge color="primary">22.03.2018</Badge>

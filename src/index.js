@@ -12,6 +12,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { Router as ReactRouter, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import ApolloClient from "apollo-client";
+import "./index.scss";
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GQL

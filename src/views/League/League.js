@@ -76,7 +76,11 @@ const League = ({ id }) => {
       <section>
         <Row>
           <Col>
-            <PageHeader icon={faChess} value="Konarskiego oficjalnie">
+            <PageHeader
+              icon={faChess}
+              kind="Liga"
+              value="Konarskiego oficjalnie"
+            >
               <h6>Przestrzegamy reguł International BeerPong Federation</h6>
             </PageHeader>
           </Col>
