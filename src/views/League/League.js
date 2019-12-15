@@ -13,7 +13,9 @@ import {
   CardSubtitle,
   ListGroup,
   Badge,
-  ListGroupItem
+  ListGroupItem,
+  CardHeader,
+  UncontrolledTooltip
 } from "reactstrap";
 
 import SectionHeader from "components/SectionHeader/SectionHeader";
@@ -22,11 +24,13 @@ import {
   faFutbol,
   faBowlingBall,
   faUsers,
-  faChess
+  faChess,
+  faTrophy
 } from "@fortawesome/free-solid-svg-icons";
 import Match from "components/Match/Match";
 import { Link } from "react-router-dom";
 import PageHeader from "components/PageHeader/PageHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const mockMatchesPlayed = [
   {
@@ -86,36 +90,149 @@ const League = ({ id }) => {
           </Col>
         </Row>
         <Row>
-          <Col sm={4} xs={12}>
-            <Counter icon={faFutbol} size="s" value={35}>
-              Rozegranych meczów
-            </Counter>
+          <Col lg={4} sm={12}>
+            <Row>
+              <Col lg={12} sm={4}>
+                <Counter icon={faFutbol} size="s" value={35}>
+                  Rozegranych meczów
+                </Counter>
+              </Col>
+              <Col lg={12} sm={4}>
+                <Counter icon={faUserAstronaut} size="s" value={41}>
+                  Aktywnych użytkowników
+                </Counter>
+              </Col>
+              <Col lg={12} sm={4}>
+                <Card className="shadow border-0 mb-3">
+                  <ListGroup>
+                    <ListGroupItem className="justify-content-between">
+                      Założona przez &nbsp;
+                      <Link>
+                        <Badge color="primary">Filip Strózik</Badge>
+                      </Link>
+                    </ListGroupItem>
+                    <ListGroupItem className="justify-content-between">
+                      Data założenia <Badge color="primary">21.03.2019</Badge>
+                    </ListGroupItem>
+                  </ListGroup>
+                </Card>
+              </Col>
+            </Row>
           </Col>
-          <Col sm={4} xs={12}>
+
+          <Col lg={8} sm={12}>
             <Card className="shadow border-0 mb-3">
+              <CardHeader>
+                <h5 className="my-0">
+                  <FontAwesomeIcon icon={faUsers} color="#fb6340" /> Ranking
+                  drużyn
+                </h5>
+              </CardHeader>
               <ListGroup>
-                <ListGroupItem className="justify-content-between">
-                  Założona przez &nbsp;
-                  <Link>
-                    <Badge color="primary">Filip Strózik</Badge>
-                  </Link>
+                <ListGroupItem
+                  tag="a"
+                  href="/player/1"
+                  className="justify-content-between d-flex"
+                >
+                  Nygusy z Konarskiego
+                  <Badge id="test6" color="warning">
+                    12
+                  </Badge>
+                  <UncontrolledTooltip
+                    delay={0}
+                    placement="bottom"
+                    target="test6"
+                  >
+                    Punkty zdobyte przez drużynę
+                  </UncontrolledTooltip>
                 </ListGroupItem>
-                <ListGroupItem className="justify-content-between">
-                  Data założenia <Badge color="primary">21.03.2019</Badge>
+                <ListGroupItem
+                  tag="a"
+                  href="/player/1"
+                  className="justify-content-between d-flex"
+                >
+                  Wydział Matematyki Stosowanej
+                  <Badge id="test7" color="warning">
+                    8
+                  </Badge>
+                  <UncontrolledTooltip
+                    delay={0}
+                    placement="bottom"
+                    target="test7"
+                  >
+                    Punkty zdobyte przez drużynę
+                  </UncontrolledTooltip>
                 </ListGroupItem>
-                <ListGroupItem className="justify-content-between">
-                  Tutaj też coś można dać <Badge color="primary">Coś</Badge>
+
+                <ListGroupItem
+                  tag="a"
+                  href="/player/1"
+                  className="justify-content-between d-flex"
+                >
+                  HGWsuad
+                  <Badge id="test9" color="warning">
+                    6
+                  </Badge>
+                  <UncontrolledTooltip
+                    delay={0}
+                    placement="bottom"
+                    target="test9"
+                  >
+                    Punkty zdobyte przez drużynę
+                  </UncontrolledTooltip>
                 </ListGroupItem>
               </ListGroup>
             </Card>
           </Col>
-          <Col sm={4} xs={12}>
-            <Counter icon={faUserAstronaut} size="s" value={41}>
-              Aktywnych użytkowników
-            </Counter>
-          </Col>
         </Row>
       </section>
+      <section className="mt-3">
+        <SectionHeader
+          size="s"
+          title="Ranking użytkowników"
+          icon={faUserAstronaut}
+        />
+        <Card className="shadow border-0 mb-3">
+          <ListGroup>
+            <ListGroupItem className="d-flex justify-content-between">
+              <div>
+                <Link to="/player/1">Filip Strózik</Link>{" "}
+                <Link to="/team/1">
+                  <Badge color="primary">Nygusy z Konarskiego</Badge>
+                </Link>
+              </div>
+              <Badge color="warning">
+                <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 21
+              </Badge>
+            </ListGroupItem>
+            <ListGroupItem className="d-flex justify-content-between">
+              {" "}
+              <div>
+                <Link to="/player/1">Jan Sudczak</Link>{" "}
+                <Link to="/team/1">
+                  <Badge color="primary">HGW squad</Badge>
+                </Link>{" "}
+              </div>
+              <Badge color="warning">
+                <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 18
+              </Badge>
+            </ListGroupItem>
+            <ListGroupItem className="d-flex justify-content-between">
+              {" "}
+              <div>
+                <Link to="/player/1">Klaudia</Link>{" "}
+                <Link to="/team/1">
+                  <Badge color="primary">Nygusy z Konarskiego</Badge>
+                </Link>{" "}
+              </div>
+              <Badge color="warning">
+                <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 11
+              </Badge>
+            </ListGroupItem>
+          </ListGroup>
+        </Card>
+      </section>
+
       <section className="mt-3">
         <SectionHeader size="s" title="Rozegrane mecze" icon={faFutbol} />
         {mockMatchesPlayed.map(match => (
