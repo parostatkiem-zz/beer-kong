@@ -13,10 +13,10 @@ import {
   InputGroupText
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 
 const AddLeagueModal = () => {
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
   const formElement = useRef(null);
   const formValues = {
     name: useRef(null),
@@ -60,6 +60,20 @@ const AddLeagueModal = () => {
               <div className="text-muted text-center">
                 Formularz zakładania ligi
               </div>
+
+              <Button
+                style={{ float: "right" }}
+                className="btn-icon btn-2"
+                color="danger"
+                type="button"
+                outline
+                size="sm"
+                onClick={() => setOpen(false)}
+              >
+                <span className="btn-inner--icon">
+                  <FontAwesomeIcon icon={faWindowClose} />
+                </span>
+              </Button>
             </CardHeader>
             <CardBody className="px-lg-4 py-lg-4">
               <Form
