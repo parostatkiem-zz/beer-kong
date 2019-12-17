@@ -15,6 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import LeaguesTable from "components/LeaguesTable/LeaguesTable";
 import SectionHeader from "components/SectionHeader/SectionHeader";
+import AddLeagueModal from "components/AddLeagueModal/AddLeagueModal";
 
 export default function Main(props) {
   return (
@@ -43,6 +44,7 @@ export default function Main(props) {
         <SectionHeader
           title="Najlepsze ligi"
           description="Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich"
+          actions={<AddLeagueModal />}
         />
         <LeaguesTable />
       </section>

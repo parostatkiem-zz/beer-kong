@@ -30,7 +30,7 @@ const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
           disabled={renderProps.disabled}
         >
           <span className="btn-inner--icon">
-            <i className="fa fa-google"></i>
+            <img src="/google.svg"></img>
           </span>
           <span className="btn-inner--text">Zaloguj się</span>
         </Button>
