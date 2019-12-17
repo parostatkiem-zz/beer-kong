@@ -7,7 +7,12 @@ import { Link } from "react-router-dom";
 
 import { Container, Row, Col, Jumbotron } from "reactstrap";
 import Counter from "components/Counter/Counter";
-import { faChess, faUserAstronaut } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChess,
+  faUserAstronaut,
+  faVolleyballBall,
+  faFutbol
+} from "@fortawesome/free-solid-svg-icons";
 import LeaguesTable from "components/LeaguesTable/LeaguesTable";
 import SectionHeader from "components/SectionHeader/SectionHeader";
 
@@ -16,14 +21,19 @@ export default function Main(props) {
     <Container className="my-3">
       <section>
         <Row>
-          <Col sm={6} xs={12}>
-            <Counter icon={faChess} value={12}>
+          <Col sm={4} xs={12}>
+            <Counter size="s" icon={faChess} value={12}>
               Obecnie otwartych lig
             </Counter>
           </Col>
-          <Col sm={6} xs={12}>
-            <Counter icon={faUserAstronaut} value={931}>
+          <Col sm={4} xs={12}>
+            <Counter size="s" icon={faUserAstronaut} value={931}>
               Zarejestrowanych użytkowników
+            </Counter>
+          </Col>
+          <Col sm={4} xs={12}>
+            <Counter size="s" icon={faFutbol} value={35}>
+              Rozegranych meczów
             </Counter>
           </Col>
         </Row>
