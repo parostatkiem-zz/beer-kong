@@ -1,23 +1,17 @@
 import React from "react";
-import classNames from "classnames";
+
 import Counter from "../../components/Counter/Counter";
 import {
   Container,
   Row,
   Col,
-  Jumbotron,
   Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardSubtitle,
   ListGroup,
   Badge,
   ListGroupItem,
   CardHeader,
   UncontrolledTooltip
 } from "reactstrap";
-
 import SectionHeader from "components/SectionHeader/SectionHeader";
 import {
   faUserAstronaut,
@@ -31,6 +25,10 @@ import Match from "components/Match/Match";
 import { Link } from "react-router-dom";
 import PageHeader from "components/PageHeader/PageHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_LEAGUE } from "gql/queries";
+import LoadingBar from "components/LoadingBar/LoadingBar";
+import useDate from "hooks/UseDate";
 
 const mockMatchesPlayed = [
   {
@@ -75,6 +73,12 @@ const mockMatchesUnplayed = [
 ];
 
 const League = ({ id }) => {
+  const league = useQuery(GET_LEAGUE, { variables: { id } });
+  const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
+  if (league.error || league.loading) {
+    return <LoadingBar />;
+  }
+
   return (
     <Container className="my-3">
       <section>
@@ -83,9 +87,9 @@ const League = ({ id }) => {
             <PageHeader
               icon={faChess}
               kind="Liga"
-              value="Konarskiego oficjalnie"
+              value={league.data.league.name}
             >
-              <h6>Przestrzegamy reguł International BeerPong Federation</h6>
+              <h6>{league.data.league.description}</h6>
             </PageHeader>
           </Col>
         </Row>
@@ -98,7 +102,11 @@ const League = ({ id }) => {
                 </Counter>
               </Col>
               <Col lg={12} sm={4}>
-                <Counter icon={faUserAstronaut} size="s" value={41}>
+                <Counter
+                  icon={faUserAstronaut}
+                  size="s"
+                  value={league.data.league.users.length}
+                >
                   Aktywnych użytkowników
                 </Counter>
               </Col>
@@ -107,12 +115,14 @@ const League = ({ id }) => {
                   <ListGroup>
                     <ListGroupItem className="justify-content-between">
                       Założona przez &nbsp;
-                      <Link>
-                        <Badge color="primary">Filip Strózik</Badge>
+                      <Link to={"/player/" + league.data.league.owner.id}>
+                        <Badge color="primary">
+                          {league.data.league.owner.name}
+                        </Badge>
                       </Link>
                     </ListGroupItem>
                     <ListGroupItem className="justify-content-between">
-                      Data założenia <Badge color="primary">21.03.2019</Badge>
+                      Data założenia <Badge color="primary">{createdAt}</Badge>
                     </ListGroupItem>
                   </ListGroup>
                 </Card>
@@ -129,58 +139,26 @@ const League = ({ id }) => {
                 </h5>
               </CardHeader>
               <ListGroup>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Nygusy z Konarskiego
-                  <Badge id="test6" color="warning">
-                    12
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test6"
+                {league.data.league.teams.map(team => (
+                  <ListGroupItem
+                    key={team.name}
+                    tag="a"
+                    href={"/team/" + team.id}
+                    className="justify-content-between d-flex"
                   >
-                    Punkty zdobyte przez drużynę
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Wydział Matematyki Stosowanej
-                  <Badge id="test7" color="warning">
-                    8
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test7"
-                  >
-                    Punkty zdobyte przez drużynę
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  HGWsuad
-                  <Badge id="test9" color="warning">
-                    6
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test9"
-                  >
-                    Punkty zdobyte przez drużynę
-                  </UncontrolledTooltip>
-                </ListGroupItem>
+                    {team.name}
+                    <Badge id={team.id} color="warning">
+                      12
+                    </Badge>
+                    <UncontrolledTooltip
+                      delay={0}
+                      placement="bottom"
+                      target={team.id}
+                    >
+                      Punkty zdobyte przez drużynę
+                    </UncontrolledTooltip>
+                  </ListGroupItem>
+                ))}
               </ListGroup>
             </Card>
           </Col>
@@ -236,14 +214,14 @@ const League = ({ id }) => {
       <section className="mt-3">
         <SectionHeader size="s" title="Rozegrane mecze" icon={faFutbol} />
         {mockMatchesPlayed.map(match => (
-          <Match {...match} />
+          <Match key={match.player1 + match.player2} {...match} />
         ))}
       </section>
 
       <section className="mt-3">
         <SectionHeader title="Planowane mecze" icon={faBowlingBall} />
         {mockMatchesUnplayed.map(match => (
-          <Match {...match} />
+          <Match key={match.player1 + match.player2} {...match} />
         ))}
       </section>
     </Container>

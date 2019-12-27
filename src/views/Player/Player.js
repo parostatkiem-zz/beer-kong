@@ -1,16 +1,10 @@
 import React from "react";
-import classNames from "classnames";
 import Counter from "../../components/Counter/Counter";
 import {
   Container,
   Row,
   Col,
-  Jumbotron,
   Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardSubtitle,
   ListGroup,
   Badge,
   ListGroupItem,
@@ -18,22 +12,27 @@ import {
   CardFooter,
   Progress
 } from "reactstrap";
-
-import SectionHeader from "components/SectionHeader/SectionHeader";
 import {
   faUserAstronaut,
   faFutbol,
-  faBowlingBall,
   faChess,
-  faUsers,
-  faUser
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
-
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_USER } from "gql/queries";
+import LoadingBar from "components/LoadingBar/LoadingBar";
+import useDate from "hooks/UseDate";
 
 const Player = ({ id }) => {
+  const user = useQuery(GET_USER, { variables: { id } });
+
+  const createdAt = useDate((user.data && user.data.user.createdAt) || null);
+
+  if (user.error || user.loading) {
+    return <LoadingBar />;
+  }
   return (
     <Container className="my-3">
       <section>
@@ -42,11 +41,11 @@ const Player = ({ id }) => {
             <PageHeader
               icon={faUserAstronaut}
               kind="Gracz"
-              value="Filip Strózik"
+              value={user.data.user.name}
             >
               <h6>
                 W piwnej społeczności od{" "}
-                <Badge color="primary">22.03.2018</Badge>
+                <Badge color="primary">{createdAt}</Badge>
               </h6>
             </PageHeader>
           </Col>
@@ -60,36 +59,23 @@ const Player = ({ id }) => {
                 </h5>
               </CardHeader>
               <ListGroup>
-                <ListGroupItem
-                  tag="a"
-                  href="/team/1"
-                  className="justify-content-between d-flex"
-                >
-                  Nygusy z Konarskiego
-                </ListGroupItem>
-
-                <ListGroupItem
-                  tag="a"
-                  href="/team/1"
-                  className="justify-content-between d-flex"
-                >
-                  Wydział Matematyki Stosowanej
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/team/1"
-                  className="justify-content-between d-flex"
-                >
-                  <strong>HGWsuad </strong>
-                  <Badge color="primary">założyciel</Badge>
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/team/1"
-                  className="justify-content-between d-flex"
-                >
-                  Tajemnice Nowogradu
-                </ListGroupItem>
+                {user.data.user.teams.map(team => (
+                  <ListGroupItem
+                    key={team.id}
+                    tag="a"
+                    href={"/team/" + team.id}
+                    className="justify-content-between d-flex"
+                  >
+                    {team.owner.id === user.data.user.id ? (
+                      <>
+                        <strong>{team.name}</strong>
+                        <Badge color="primary">założyciel</Badge>
+                      </>
+                    ) : (
+                      team.name
+                    )}
+                  </ListGroupItem>
+                ))}
               </ListGroup>
             </Card>
           </Col>
@@ -129,21 +115,23 @@ const Player = ({ id }) => {
                 </h5>
               </CardHeader>
               <ListGroup>
-                <ListGroupItem
-                  tag="a"
-                  href="/league/1"
-                  className="justify-content-between d-flex"
-                >
-                  <strong>Konarskiego na luzie </strong>
-                  <Badge color="primary">założyciel</Badge>
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/league/1"
-                  className="justify-content-between d-flex"
-                >
-                  Konarskiego oficjalnie
-                </ListGroupItem>
+                {user.data.user.leagues.map(league => (
+                  <ListGroupItem
+                    key={league.id}
+                    tag="a"
+                    href={"/league/" + league.id}
+                    className="justify-content-between d-flex"
+                  >
+                    {league.owner.id === user.data.user.id ? (
+                      <>
+                        <strong>{league.name}</strong>
+                        <Badge color="primary">założyciel</Badge>
+                      </>
+                    ) : (
+                      league.name
+                    )}
+                  </ListGroupItem>
+                ))}
               </ListGroup>
             </Card>
           </Col>

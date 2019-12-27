@@ -3,37 +3,6 @@ import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import SingleLeague from "./SingleLeague/SingleLeague";
 
 const LeaguesTable = ({ leagues }) => {
-  // const leagues = [
-  //   {
-  //     name: "Konarskiego oficjalnie",
-  //     description: "Przestrzegamy reguł International BeerPong Federation",
-  //     matches: 10,
-  //     players: 17,
-  //     teams: 3,
-  //     beers: 22,
-  //     id: 1
-  //   },
-  //   {
-  //     name: "MS Beertrinken",
-  //     description:
-  //       "Szeregi Furiera, gradienty w kwadracie  - to nie dla mnie, wolę browar na chacie",
-  //     matches: 3,
-  //     players: 57,
-  //     teams: 12,
-  //     beers: 324,
-  //     id: 1
-  //   },
-  //   {
-  //     name: "Konarskiego na luzie",
-  //     description: "Liczy się piwo i dobra zabawa",
-  //     matches: 14,
-  //     players: 14,
-  //     teams: 3,
-  //     beers: 37,
-  //     id: 1
-  //   }
-  // ];
-
   return (
     <>
       {leagues.map(l => (
