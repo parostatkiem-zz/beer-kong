@@ -8,14 +8,15 @@ import {
   Form,
   FormGroup,
   InputGroup,
-  InputGroupAddon,
-  Input,
-  InputGroupText
+  Input
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { ADD_LEAGUE } from "gql/mutations";
+import { useMutation } from "@apollo/react-hooks";
 
 const AddLeagueModal = () => {
+  const [addLeague] = useMutation(ADD_LEAGUE);
   const [isOpen, setOpen] = useState(false);
   const formElement = useRef(null);
   const formValues = {
@@ -27,9 +28,11 @@ const AddLeagueModal = () => {
     if (formElement.current.reportValidity()) {
       const data = {
         name: formValues.name.current.value,
-        description: formValues.description.current.value
+        description: formValues.description.current.value,
+        users: []
       };
       console.log(data);
+      addLeague({ variables: { data } });
     }
 
     return false;
@@ -88,7 +91,7 @@ const AddLeagueModal = () => {
                       placeholder="Nazwa"
                       type="text"
                       required
-                      pattern="[A-Za-z]+"
+                      pattern="[A-Za-z ]+"
                     />
                   </InputGroup>
                 </FormGroup>
