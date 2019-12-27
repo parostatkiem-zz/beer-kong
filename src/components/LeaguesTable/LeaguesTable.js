@@ -1,60 +1,38 @@
-import React, { Children } from "react";
-import {
-  Jumbotron,
-  Row,
-  Col,
-  Table,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
-  Card,
-  CardBody,
-  Badge,
-  Button,
-  ListGroup,
-  ListGroupItem
-} from "reactstrap";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUserAstronaut,
-  faUsers,
-  faBeer,
-  faFutbol
-} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import SingleLeague from "./SingleLeague/SingleLeague";
 
-const LeaguesTable = ({}) => {
-  const leagues = [
-    {
-      name: "Konarskiego oficjalnie",
-      description: "Przestrzegamy reguł International BeerPong Federation",
-      matches: 10,
-      players: 17,
-      teams: 3,
-      beers: 22,
-      id: 1
-    },
-    {
-      name: "MS Beertrinken",
-      description:
-        "Szeregi Furiera, gradienty w kwadracie  - to nie dla mnie, wolę browar na chacie",
-      matches: 3,
-      players: 57,
-      teams: 12,
-      beers: 324,
-      id: 1
-    },
-    {
-      name: "Konarskiego na luzie",
-      description: "Liczy się piwo i dobra zabawa",
-      matches: 14,
-      players: 14,
-      teams: 3,
-      beers: 37,
-      id: 1
-    }
-  ];
+const LeaguesTable = ({ leagues }) => {
+  // const leagues = [
+  //   {
+  //     name: "Konarskiego oficjalnie",
+  //     description: "Przestrzegamy reguł International BeerPong Federation",
+  //     matches: 10,
+  //     players: 17,
+  //     teams: 3,
+  //     beers: 22,
+  //     id: 1
+  //   },
+  //   {
+  //     name: "MS Beertrinken",
+  //     description:
+  //       "Szeregi Furiera, gradienty w kwadracie  - to nie dla mnie, wolę browar na chacie",
+  //     matches: 3,
+  //     players: 57,
+  //     teams: 12,
+  //     beers: 324,
+  //     id: 1
+  //   },
+  //   {
+  //     name: "Konarskiego na luzie",
+  //     description: "Liczy się piwo i dobra zabawa",
+  //     matches: 14,
+  //     players: 14,
+  //     teams: 3,
+  //     beers: 37,
+  //     id: 1
+  //   }
+  // ];
 
   return (
     <>

@@ -19,6 +19,7 @@ const httpLink = createHttpLink({
   // fetchOptions: {
   //   mode: "no-cors"
   // }
+  // compress: true,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -26,14 +27,16 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: `Bearer 1234`
+      authorization: `Bearer 1234`,
+      "Content-Type": "application/json"
     }
   };
 });
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  defaultOptions: { errorPolicy: "all" }
 });
 
 var hist = createBrowserHistory();

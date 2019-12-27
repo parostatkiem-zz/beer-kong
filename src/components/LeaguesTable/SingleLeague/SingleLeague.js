@@ -1,12 +1,7 @@
-import React, { Children } from "react";
+import React from "react";
 import {
-  Jumbotron,
   Row,
   Col,
-  Table,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
   Card,
   CardBody,
   Badge,
@@ -29,10 +24,10 @@ const SingleLeague = ({
   name,
   description,
   id,
-  players,
+  users,
   teams,
-  matches,
-  beers
+  matches = 5,
+  beers = 0
 }) => {
   return (
     <Card className="shadow border-0 mb-3 single-league">
@@ -55,12 +50,12 @@ const SingleLeague = ({
               <ListGroupItem className="property">
                 <FontAwesomeIcon icon={faUserAstronaut} />
                 <span className="text">Gracze</span>
-                <Badge color="primary">{players}</Badge>
+                <Badge color="primary">{users.length}</Badge>
               </ListGroupItem>
               <ListGroupItem className="property">
                 <FontAwesomeIcon icon={faUsers} />
                 <span className="text">Drużyny</span>
-                <Badge color="primary">{teams}</Badge>
+                <Badge color="primary">{teams.length}</Badge>
               </ListGroupItem>
               <ListGroupItem className="property">
                 <FontAwesomeIcon icon={faFutbol} />
