@@ -15,9 +15,8 @@ import { GET_LEAGUES, GET_USERS } from "gql/queries";
 
 export default function Main(props) {
   const leagues = useQuery(GET_LEAGUES);
-
   const users = useQuery(GET_USERS);
-  console.log(leagues.data);
+
   return (
     <Container className="my-3">
       <section>

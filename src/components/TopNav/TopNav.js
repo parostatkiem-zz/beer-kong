@@ -9,8 +9,7 @@ import {
   Row,
   Col,
   Nav,
-  NavItem,
-  NavLink
+  NavItem
 } from "reactstrap";
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import UserDisplay from "./UserDisplay/UserDisplay";
@@ -55,7 +54,6 @@ const TopNav = () => {
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
 
   function responseGoogle(resp) {
-    console.log("google response:", resp);
     setUserInfo(resp.error ? null : resp);
   }
 
