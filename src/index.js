@@ -23,11 +23,13 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token");
+  const userInfo = sessionStorage.getItem("userInfo");
+
+  const token = userInfo ? JSON.parse(userInfo).tokenId : null;
   return {
     headers: {
       ...headers,
-      authorization: `Bearer 1234`,
+      Authorization: `${token}`,
       "Content-Type": "application/json"
     }
   };

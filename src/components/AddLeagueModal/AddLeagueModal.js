@@ -14,10 +14,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { ADD_LEAGUE } from "gql/mutations";
 import { useMutation } from "@apollo/react-hooks";
+import { GET_LEAGUES } from "gql/queries";
+import ErrorModal from "components/ErrorModal/ErrorModal";
 
 const AddLeagueModal = () => {
-  const [addLeague] = useMutation(ADD_LEAGUE);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [addLeague] = useMutation(ADD_LEAGUE, {
+    refetchQueries: [GET_LEAGUES],
+    onError: e => setErrorMessage(e.message),
+    onCompleted: () => setOpen(false)
+  });
   const [isOpen, setOpen] = useState(false);
+
   const formElement = useRef(null);
   const formValues = {
     name: useRef(null),
@@ -31,7 +39,6 @@ const AddLeagueModal = () => {
         description: formValues.description.current.value,
         users: []
       };
-      console.log(data);
       addLeague({ variables: { data } });
     }
 
@@ -39,6 +46,7 @@ const AddLeagueModal = () => {
   }
   return (
     <>
+      {errorMessage && <ErrorModal text={errorMessage} />}
       <Button
         className="btn-icon"
         block
@@ -64,19 +72,15 @@ const AddLeagueModal = () => {
                 Formularz zakładania ligi
               </div>
 
-              <Button
-                style={{ float: "right" }}
-                className="btn-icon btn-2"
-                color="danger"
+              <button
+                aria-label="Close"
+                className="close"
+                data-dismiss="modal"
                 type="button"
-                outline
-                size="sm"
                 onClick={() => setOpen(false)}
               >
-                <span className="btn-inner--icon">
-                  <FontAwesomeIcon icon={faWindowClose} />
-                </span>
-              </Button>
+                <span aria-hidden={true}>×</span>
+              </button>
             </CardHeader>
             <CardBody className="px-lg-4 py-lg-4">
               <Form
