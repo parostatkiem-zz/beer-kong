@@ -49,6 +49,7 @@ export const GET_USER = gql`
     user(where: { id: $id }) {
       id
       name
+      createdAt
       teams {
         id
         name

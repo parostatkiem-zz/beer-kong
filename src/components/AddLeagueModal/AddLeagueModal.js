@@ -11,7 +11,7 @@ import {
   Input
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { ADD_LEAGUE } from "gql/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import { GET_LEAGUES } from "gql/queries";

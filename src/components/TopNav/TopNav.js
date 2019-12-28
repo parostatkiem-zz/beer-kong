@@ -15,6 +15,8 @@ import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import UserDisplay from "./UserDisplay/UserDisplay";
 import { Link } from "react-router-dom";
 import "./TopNav.scss";
+import { CREATE_USER } from "gql/mutations";
+import { useMutation } from "@apollo/react-hooks";
 
 const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
   !isLoggedIn ? (
@@ -52,13 +54,36 @@ const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
 
 const TopNav = () => {
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
+  const [createUser] = useMutation(CREATE_USER, {
+    // refetchQueries: [GET_LEAGUES],
+    onError: console.error,
+    onCompleted: data => setUserInfo(data.createUser)
+  });
 
   function responseGoogle(resp) {
-    setUserInfo(resp.error ? null : resp);
+    if (resp.error) {
+      console.error("Could not log in");
+      return;
+    }
+
+    const profile = resp.profileObj;
+    createUser({
+      variables: {
+        data: {
+          name: profile.name,
+          sub: profile.googleId,
+          picture: profile.imageUrl
+        }
+      }
+    });
+
+    // setUserInfo(resp.error ? null : resp);
+    sessionStorage.setItem("token", resp.tokenId);
   }
 
   function logout() {
     setUserInfo(null);
+    sessionStorage.removeItem("token");
   }
 
   return (
@@ -90,14 +115,7 @@ const TopNav = () => {
             </Row>
           </div>
           <Nav className="ml-lg-auto" navbar>
-            <NavItem>
-              {userInfo && (
-                <UserDisplay
-                  image={userInfo.profileObj.imageUrl}
-                  name={`${userInfo.profileObj.givenName} ${userInfo.profileObj.familyName}`}
-                />
-              )}
-            </NavItem>
+            <NavItem>{userInfo && <UserDisplay {...userInfo} />}</NavItem>
             <NavItem>
               <LoginLogoutButtons
                 onResponse={responseGoogle}

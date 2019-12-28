@@ -7,3 +7,13 @@ export const ADD_LEAGUE = gql`
     }
   }
 `;
+
+export const CREATE_USER = gql`
+  mutation CreateUser($data: UserCreateInput!) {
+    createUser(data: $data) {
+      name
+      id
+      picture
+    }
+  }
+`;

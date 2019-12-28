@@ -9,7 +9,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { Router as ReactRouter, Route, Switch } from "react-router-dom";
+import { Router as ReactRouter } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import ApolloClient from "apollo-client";
 import "./index.scss";
@@ -23,9 +23,8 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const userInfo = sessionStorage.getItem("userInfo");
+  const token = sessionStorage.getItem("token") || null;
 
-  const token = userInfo ? JSON.parse(userInfo).tokenId : null;
   return {
     headers: {
       ...headers,
