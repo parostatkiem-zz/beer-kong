@@ -29,6 +29,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_LEAGUE } from "gql/queries";
 import LoadingBar from "components/LoadingBar/LoadingBar";
 import useDate from "hooks/UseDate";
+import ErrorModal from "components/ErrorModal/ErrorModal";
 
 const mockMatchesPlayed = [
   {
@@ -75,7 +76,11 @@ const mockMatchesUnplayed = [
 const League = ({ id }) => {
   const league = useQuery(GET_LEAGUE, { variables: { id } });
   const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
-  if (league.error || league.loading) {
+
+  if (league.error) {
+    return <ErrorModal text={league.error.message} />;
+  }
+  if (league.loading) {
     return <LoadingBar />;
   }
 

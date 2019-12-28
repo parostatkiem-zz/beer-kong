@@ -12,6 +12,7 @@ import SectionHeader from "components/SectionHeader/SectionHeader";
 import AddLeagueModal from "components/AddLeagueModal/AddLeagueModal";
 import LoadingBar from "components/LoadingBar/LoadingBar";
 import { GET_LEAGUES, GET_USERS } from "gql/queries";
+import ErrorModal from "components/ErrorModal/ErrorModal";
 
 export default function Main(props) {
   const leagues = useQuery(GET_LEAGUES);
@@ -55,7 +56,10 @@ export default function Main(props) {
         />
 
         {leagues.error || leagues.loading ? (
-          <LoadingBar />
+          <>
+            {leagues.error && <ErrorModal text={leagues.error.message} />}
+            <LoadingBar />
+          </>
         ) : (
           <LeaguesTable leagues={leagues.data.leagues} />
         )}

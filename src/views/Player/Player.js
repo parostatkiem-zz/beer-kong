@@ -24,13 +24,17 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_USER } from "gql/queries";
 import LoadingBar from "components/LoadingBar/LoadingBar";
 import useDate from "hooks/UseDate";
+import ErrorModal from "components/ErrorModal/ErrorModal";
 
 const Player = ({ id }) => {
   const user = useQuery(GET_USER, { variables: { id } });
 
   const createdAt = useDate((user.data && user.data.user.createdAt) || null);
 
-  if (user.error || user.loading) {
+  if (user.error) {
+    return <ErrorModal text={user.error.message} />;
+  }
+  if (user.loading) {
     return <LoadingBar />;
   }
   return (
