@@ -31,6 +31,8 @@ import LoadingBar from "components/LoadingBar/LoadingBar";
 import useDate from "hooks/UseDate";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 
+import AddTeamModal from "./../../components/AddTeamModal/AddTeamModal";
+
 const mockMatchesPlayed = [
   {
     player1: "Jan Kowalski",
@@ -142,6 +144,7 @@ const League = ({ id }) => {
                   <FontAwesomeIcon icon={faUsers} color="#fb6340" /> Ranking
                   drużyn
                 </h5>
+                <AddTeamModal leagueId={id} />
               </CardHeader>
               <ListGroup>
                 {league.data.league.teams.map(team => (

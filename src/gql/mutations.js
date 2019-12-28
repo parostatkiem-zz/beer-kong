@@ -8,6 +8,14 @@ export const ADD_LEAGUE = gql`
   }
 `;
 
+export const ADD_TEAM = gql`
+  mutation CreateTeam($data: TeamCreateInput!) {
+    createTeam(data: $data) {
+      name
+    }
+  }
+`;
+
 export const CREATE_USER = gql`
   mutation CreateUser($data: UserCreateInput!) {
     createUser(data: $data) {

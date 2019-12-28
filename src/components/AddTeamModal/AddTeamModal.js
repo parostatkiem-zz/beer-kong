@@ -12,15 +12,16 @@ import {
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { ADD_LEAGUE } from "gql/mutations";
+import { ADD_TEAM } from "gql/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import { GET_LEAGUES } from "gql/queries";
 import ErrorModal from "components/ErrorModal/ErrorModal";
+import { GET_LEAGUE } from "gql/queries";
 
-const AddLeagueModal = () => {
+const AddTeamModal = ({ leagueId }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [addLeague] = useMutation(ADD_LEAGUE, {
-    refetchQueries: [GET_LEAGUES],
+  const [addTeam] = useMutation(ADD_TEAM, {
+    refetchQueries: [GET_LEAGUES, GET_LEAGUE],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });
@@ -37,9 +38,11 @@ const AddLeagueModal = () => {
       const data = {
         name: formValues.name.current.value,
         description: formValues.description.current.value,
-        users: []
+        league: {
+          id: leagueId
+        }
       };
-      addLeague({ variables: { data } });
+      addTeam({ variables: { data } });
     }
     setOpen(false);
     return false;
@@ -48,8 +51,8 @@ const AddLeagueModal = () => {
     <>
       {errorMessage && <ErrorModal text={errorMessage} />}
       <Button
-        className="btn-icon"
-        block
+        className="btn-icon ml-auto"
+        size="sm"
         color="primary"
         type="button"
         onClick={() => setOpen(true)}
@@ -57,7 +60,7 @@ const AddLeagueModal = () => {
         <span className="btn-inner--icon">
           <FontAwesomeIcon icon={faPlus} />
         </span>
-        <span className="btn-inner--text">Załóż ligę</span>
+        <span className="btn-inner--text">Załóż drużynę</span>
       </Button>
       <Modal
         className="modal-dialog-centered"
@@ -69,7 +72,7 @@ const AddLeagueModal = () => {
           <Card className="bg-secondary shadow border-0">
             <CardHeader className="bg-transparent pb-3 text-center">
               <div className="text-muted text-center">
-                Formularz zakładania ligi
+                Formularz zakładania drużyny
               </div>
 
               <button
@@ -132,4 +135,4 @@ const AddLeagueModal = () => {
   );
 };
 
-export default AddLeagueModal;
+export default AddTeamModal;
