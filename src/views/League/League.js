@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Counter from "../../components/Counter/Counter";
 import {
@@ -30,7 +30,7 @@ import { GET_LEAGUE } from "gql/queries";
 import LoadingBar from "components/LoadingBar/LoadingBar";
 import useDate from "hooks/UseDate";
 import ErrorModal from "components/ErrorModal/ErrorModal";
-
+import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import AddTeamModal from "./../../components/AddTeamModal/AddTeamModal";
 
 const mockMatchesPlayed = [
@@ -78,7 +78,7 @@ const mockMatchesUnplayed = [
 const League = ({ id }) => {
   const league = useQuery(GET_LEAGUE, { variables: { id } });
   const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
-
+  const { userInfo } = useContext(UserInfoContext);
   if (league.error) {
     return <ErrorModal text={league.error.message} />;
   }
@@ -154,7 +154,14 @@ const League = ({ id }) => {
                     href={"/team/" + team.id}
                     className="justify-content-between d-flex"
                   >
-                    {team.name}
+                    {team.owner.id === userInfo.id ? (
+                      <>
+                        <strong> {team.name}</strong>
+                        <Badge color="primary">założyciel</Badge>
+                      </>
+                    ) : (
+                      <span> {team.name}</span>
+                    )}
                     <Badge id={team.id} color="warning">
                       12
                     </Badge>

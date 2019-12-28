@@ -31,6 +31,9 @@ export const GET_LEAGUE = gql`
       teams {
         name
         id
+        owner {
+          id
+        }
       }
     }
   }
