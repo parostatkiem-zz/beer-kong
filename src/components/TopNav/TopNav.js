@@ -66,12 +66,6 @@ const TopNav = () => {
       <Container>
         <NavbarBrand href="/">Beer Kong</NavbarBrand>
 
-        {userInfo && (
-          <UserDisplay
-            image={userInfo.profileObj.imageUrl}
-            name={`${userInfo.profileObj.givenName} ${userInfo.profileObj.familyName}`}
-          />
-        )}
         <button className="navbar-toggler" id="navbar-default">
           <span className="navbar-toggler-icon" />
         </button>
@@ -96,6 +90,14 @@ const TopNav = () => {
             </Row>
           </div>
           <Nav className="ml-lg-auto" navbar>
+            <NavItem>
+              {userInfo && (
+                <UserDisplay
+                  image={userInfo.profileObj.imageUrl}
+                  name={`${userInfo.profileObj.givenName} ${userInfo.profileObj.familyName}`}
+                />
+              )}
+            </NavItem>
             <NavItem>
               <LoginLogoutButtons
                 onResponse={responseGoogle}

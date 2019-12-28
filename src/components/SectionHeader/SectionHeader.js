@@ -8,7 +8,7 @@ import "./SectionHeader.scss";
 const SectionHeader = ({ title, description, icon, actions }) => {
   return (
     <>
-      <hr className="my-3" />
+      <hr className="my-2" />
       <div
         style={{ alignItems: "end" }}
         className={classNames(["d-flex", "my-3", "section-header"])}
@@ -20,8 +20,8 @@ const SectionHeader = ({ title, description, icon, actions }) => {
             </div>
           </div>
         )}
-        <div className="pl-4 header">
-          <h4 className=" text-white">{title}</h4>
+        <div className=" header">
+          <h2 className=" text-white">{title}</h2>
           <p style={{ color: "#e9ecef" }}>{description}</p>
         </div>
         <div className="actions"> {actions}</div>

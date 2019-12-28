@@ -29,8 +29,8 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      Authorization: `${token}`,
-      "Content-Type": "application/json"
+      Authorization: `${token}`
+      // "Content-Type": "application/json"
     }
   };
 });

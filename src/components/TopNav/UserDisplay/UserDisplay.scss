@@ -4,9 +4,15 @@
   margin: 0 1em;
 
   &__img {
-    max-height: 3.2em;
+    max-height: 3em;
     border-radius: 3px;
     margin-right: 0.5em;
     box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.3);
+  }
+  &__name {
+    color: white;
+    &:hover {
+      color: #ccc;
+    }
   }
 }

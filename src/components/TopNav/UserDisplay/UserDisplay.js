@@ -1,12 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./UserDisplay.scss";
+import { Button } from "reactstrap";
 
-const UserDisplay = ({ image, name }) => (
+const UserDisplay = ({ image, name, id }) => (
   <div className="user-display">
-    <Link to={"/user/" + 1}>
+    <Link to={"/user/" + id}>
       <img className="user-display__img" src={image} alt="" />
-      <span className="user-display__name">{name}</span>
+      <Button
+        color="secondary"
+        size="sm"
+        type="button"
+        className="user-display__name"
+      >
+        {name}
+      </Button>
     </Link>
   </div>
 );
