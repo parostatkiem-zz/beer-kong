@@ -64,9 +64,12 @@ const AddMatchModal = ({ leagueId, usersToChoseFrom }) => {
     onCompleted: () => setOpen(false)
   });
   const [isOpen, setOpen] = useState(false);
-
-  const [user1, setUser1] = useState(usersToChoseFrom[0].id);
-  const [user2, setUser2] = useState(usersToChoseFrom[1].id);
+  const [user1, setUser1] = useState(
+    (usersToChoseFrom && usersToChoseFrom[0].id) || null
+  );
+  const [user2, setUser2] = useState(
+    (usersToChoseFrom && usersToChoseFrom[1].id) || null
+  );
 
   const formElement = useRef(null);
   const formValues = {

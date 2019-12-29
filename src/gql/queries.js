@@ -36,6 +36,10 @@ export const GET_LEAGUE = gql`
         owner {
           id
         }
+        users {
+          id
+          name
+        }
       }
       users {
         name

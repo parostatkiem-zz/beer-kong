@@ -108,7 +108,9 @@ const League = ({ id }) => {
                 (userInfo && userInfo.id === league.data.league.owner.id && (
                   <AddMatchModal
                     leagueId={league.data.league.id}
-                    usersToChoseFrom={mockUsers}
+                    usersToChoseFrom={league.data.league.teams.flatMap(
+                      t => t.users
+                    )}
                   />
                 )) ||
                 null
