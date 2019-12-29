@@ -79,14 +79,14 @@ const AddMatchModal = ({ leagueId, usersToChoseFrom }) => {
   function handleFormSubmit(e) {
     if (formElement.current.reportValidity() && formValues.expiration.current) {
       const data = {
-        expiration: formValues.expiration.current,
+        plannedAt: formValues.expiration.current,
         user1: { id: user1 },
         user2: { id: user2 },
         league: { id: leagueId },
         isRanked: true
       };
       console.log(data);
-      //  addMatch({ variables: { data } });
+      addMatch({ variables: { data } });
     } else {
       setErrorMessage("Wszystkie pola muszą być wypełnione");
       return false;
