@@ -21,7 +21,7 @@ import { GET_LEAGUE } from "gql/queries";
 const AddTeamModal = ({ leagueId }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [addTeam] = useMutation(ADD_TEAM, {
-    refetchQueries: [GET_LEAGUES, GET_LEAGUE],
+    refetchQueries: [{ query: GET_LEAGUES }, { query: GET_LEAGUE }],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });

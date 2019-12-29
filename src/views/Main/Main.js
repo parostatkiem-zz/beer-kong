@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Container, Row, Col } from "reactstrap";
 import Counter from "components/Counter/Counter";
@@ -13,11 +13,12 @@ import AddLeagueModal from "components/AddLeagueModal/AddLeagueModal";
 import LoadingBar from "components/LoadingBar/LoadingBar";
 import { GET_LEAGUES, GET_USERS } from "gql/queries";
 import ErrorModal from "components/ErrorModal/ErrorModal";
+import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 
 export default function Main(props) {
   const leagues = useQuery(GET_LEAGUES);
   const users = useQuery(GET_USERS);
-
+  const { userInfo } = useContext(UserInfoContext);
   return (
     <Container className="my-3">
       <section>
@@ -26,7 +27,7 @@ export default function Main(props) {
             <Counter
               size="s"
               icon={faChess}
-              value={(leagues.data && leagues.data.leagues.length) || "..."}
+              value={leagues.data ? leagues.data.leagues.length : "..."}
             >
               Obecnie otwartych lig
             </Counter>
@@ -35,7 +36,7 @@ export default function Main(props) {
             <Counter
               size="s"
               icon={faUserAstronaut}
-              value={(users.data && users.data.users.length) || "..."}
+              value={users.data ? users.data.users.length : "..."}
             >
               Zarejestrowanych użytkowników
             </Counter>
@@ -52,7 +53,7 @@ export default function Main(props) {
         <SectionHeader
           title="Najlepsze ligi"
           description="Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich"
-          actions={<AddLeagueModal />}
+          actions={userInfo ? <AddLeagueModal /> : null}
         />
 
         {leagues.error || leagues.loading ? (

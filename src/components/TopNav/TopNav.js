@@ -57,7 +57,7 @@ const TopNav = () => {
   const [createUser] = useMutation(CREATE_USER, {
     // refetchQueries: [GET_LEAGUES],
     onError: console.error,
-    onCompleted: data => setUserInfo(data.createUser)
+    onCompleted: data => setUserInfo(data.loginOrRegisterUser)
   });
 
   function responseGoogle(resp) {

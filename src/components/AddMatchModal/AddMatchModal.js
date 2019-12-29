@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   Button,
   Modal,
@@ -59,7 +59,7 @@ const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
 const AddMatchModal = ({ leagueId, usersToChoseFrom }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [addMatch] = useMutation(CREATE_MATCH, {
-    refetchQueries: [GET_LEAGUE],
+    refetchQueries: [{ query: GET_LEAGUE }],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });

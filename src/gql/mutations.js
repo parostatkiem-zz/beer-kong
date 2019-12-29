@@ -17,8 +17,8 @@ export const ADD_TEAM = gql`
 `;
 
 export const CREATE_USER = gql`
-  mutation CreateUser($data: UserCreateInput!) {
-    createUser(data: $data) {
+  mutation LoginOrRegisterUser($data: UserCreateInput!) {
+    loginOrRegisterUser(data: $data) {
       name
       id
       picture

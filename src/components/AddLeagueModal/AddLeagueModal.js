@@ -20,7 +20,7 @@ import ErrorModal from "components/ErrorModal/ErrorModal";
 const AddLeagueModal = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [addLeague] = useMutation(ADD_LEAGUE, {
-    refetchQueries: [GET_LEAGUES],
+    refetchQueries: [{ query: GET_LEAGUES }],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });
