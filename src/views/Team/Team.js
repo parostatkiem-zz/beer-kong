@@ -57,6 +57,7 @@ const Team = ({ id }) => {
                 (userInfo && userInfo.id === team.data.team.owner.id && (
                   <AddUserToTeamModal
                     teamId={id}
+                    leagueId={team.data.team.league.id}
                     usersToChoseFrom={(users.data && users.data.users) || []}
                   />
                 )) ||
@@ -82,6 +83,7 @@ const Team = ({ id }) => {
               <ListGroup>
                 {team.data.team.users.map(u => (
                   <ListGroupItem
+                    key={u.id}
                     tag="a"
                     href={"/player/" + u.id}
                     className="justify-content-between d-flex"
@@ -113,19 +115,19 @@ const Team = ({ id }) => {
           <Col xs={12} sm={4}>
             <Card className="shadow border-0 mb-3">
               <ListGroup>
-                <ListGroupItem className="justify-content-between">
+                <ListGroupItem key="league" className="justify-content-between">
                   Liga &nbsp;
                   <Link to={"/league/" + team.data.team.league.id}>
                     <Badge color="primary">{team.data.team.league.name}</Badge>
                   </Link>
                 </ListGroupItem>
-                <ListGroupItem className="justify-content-between">
+                <ListGroupItem key="owner" className="justify-content-between">
                   Założona przez &nbsp;
                   <Link to={"/player/" + team.data.team.owner.id}>
                     <Badge color="primary">{team.data.team.owner.name}</Badge>
                   </Link>
                 </ListGroupItem>
-                <ListGroupItem className="justify-content-between">
+                <ListGroupItem key="date" className="justify-content-between">
                   Data założenia <Badge color="primary">{createdAt}</Badge>
                 </ListGroupItem>
               </ListGroup>
@@ -135,6 +137,8 @@ const Team = ({ id }) => {
       </section>
 
       <section className="mt-3">
+        {" "}
+        <h1>TODO: zbliżające się mecze</h1>
         <Row>
           <Col sm={6} xs={12}>
             <Card className="shadow border-0 mb-3">

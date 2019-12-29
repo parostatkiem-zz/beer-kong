@@ -9,23 +9,30 @@ import {
   FormGroup,
   InputGroup,
   Input,
-  InputGroupAddon,
-  InputGroupText,
   Label
 } from "reactstrap";
-import ReactDatetime from "react-datetime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useMutation } from "@apollo/react-hooks";
 import ErrorModal from "components/ErrorModal/ErrorModal";
-import { CREATE_MATCH } from "gql/mutations";
-import { GET_LEAGUE } from "gql/queries";
 import { ADD_USER_TO_TEAM } from "gql/mutations";
 import { GET_TEAM } from "gql/queries";
 
-const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
+const UserSelector = ({
+  allUsers,
+  setUserFn,
+  label,
+  userToExclude,
+  leagueId
+}) => {
   const [search, setSearch] = useState("");
-
+  function canUserBeAdded(u) {
+    return (
+      u.id !== userToExclude &&
+      u.name.match(new RegExp(search, "i")) &&
+      !u.leagues.some(l => (l.id = leagueId))
+    );
+  }
   return (
     <>
       <Label htmlFor={label}>{label}</Label>
@@ -44,21 +51,17 @@ const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
         id={label}
         onChange={e => (e = setUserFn(e.target.value))}
       >
-        {allUsers
-          .filter(
-            u => u.id !== userToExclude && u.name.match(new RegExp(search, "i"))
-          )
-          .map(u => (
-            <option value={u.id} key={u.id}>
-              {u.name}
-            </option>
-          ))}
+        {allUsers.filter(canUserBeAdded).map(u => (
+          <option value={u.id} key={u.id}>
+            {u.name}
+          </option>
+        ))}
       </Input>
     </>
   );
 };
 
-const AddUserToTeamModal = ({ teamId, usersToChoseFrom }) => {
+const AddUserToTeamModal = ({ teamId, leagueId, usersToChoseFrom }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [addUserToTeam] = useMutation(ADD_USER_TO_TEAM, {
     refetchQueries: [{ query: GET_TEAM, variables: { id: teamId } }],
@@ -136,6 +139,7 @@ const AddUserToTeamModal = ({ teamId, usersToChoseFrom }) => {
                   <UserSelector
                     setUserFn={setUser1}
                     allUsers={usersToChoseFrom}
+                    leagueId={leagueId}
                   />
                 </FormGroup>
 

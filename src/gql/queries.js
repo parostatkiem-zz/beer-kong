@@ -61,6 +61,9 @@ export const GET_USERS = gql`
     users {
       name
       id
+      leagues {
+        id
+      }
     }
   }
 `;
@@ -103,6 +106,9 @@ export const GET_TEAM = gql`
       users {
         id
         name
+        leagues {
+          id
+        }
       }
       owner {
         id
