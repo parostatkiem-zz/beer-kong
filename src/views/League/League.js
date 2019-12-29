@@ -212,8 +212,12 @@ const League = ({ id }) => {
               >
                 <div>
                   <Link to={"/player/" + u.id}>{u.name}</Link>{" "}
-                  <Link to="/team/1">
-                    <Badge color="primary">Nygusy z Konarskiego</Badge>
+                  <Link
+                    to={"/team/" + u.teams.find(t => t.league.id === id).id}
+                  >
+                    <Badge color="primary">
+                      {u.teams.find(t => t.league.id === id).name}
+                    </Badge>
                   </Link>
                 </div>
                 <Badge color="warning">

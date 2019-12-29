@@ -56,6 +56,7 @@ export const GET_USERS = gql`
   query Users {
     users {
       name
+      id
     }
   }
 `;
@@ -79,6 +80,29 @@ export const GET_USER = gql`
         owner {
           id
         }
+      }
+    }
+  }
+`;
+
+export const GET_TEAM = gql`
+  query Team($id: ID) {
+    team(where: { id: $id }) {
+      id
+      name
+      description
+      createdAt
+      league {
+        id
+        name
+      }
+      users {
+        id
+        name
+      }
+      owner {
+        id
+        name
       }
     }
   }

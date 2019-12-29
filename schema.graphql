@@ -98,7 +98,7 @@ input LeagueWhereUniqueInput {
 type Match {
   id: ID!
   createdAt: DateTime!
-  expiration: DateTime!
+  plannedAt: DateTime!
   isRanked: Boolean!
   isFinished: Boolean
   league: League!
@@ -111,11 +111,16 @@ type Match {
 }
 
 input MatchCreateInput {
-  expiration: DateTime!
+  plannedAt: DateTime!
   isRanked: Boolean!
   league: LeagueWhereUniqueInput!
   user1: UserWhereUniqueInput!
   user2: UserWhereUniqueInput!
+}
+
+input MatchEndInput {
+  user1points: Int!
+  user2points: Int!
 }
 
 enum MatchOrderByInput {
@@ -123,8 +128,8 @@ enum MatchOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
-  expiration_ASC
-  expiration_DESC
+  plannedAt_ASC
+  plannedAt_DESC
   isRanked_ASC
   isRanked_DESC
   isFinished_ASC
@@ -160,14 +165,14 @@ input MatchWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
-  expiration: DateTime
-  expiration_not: DateTime
-  expiration_in: [DateTime!]
-  expiration_not_in: [DateTime!]
-  expiration_lt: DateTime
-  expiration_lte: DateTime
-  expiration_gt: DateTime
-  expiration_gte: DateTime
+  plannedAt: DateTime
+  plannedAt_not: DateTime
+  plannedAt_in: [DateTime!]
+  plannedAt_not_in: [DateTime!]
+  plannedAt_lt: DateTime
+  plannedAt_lte: DateTime
+  plannedAt_gt: DateTime
+  plannedAt_gte: DateTime
   isRanked: Boolean
   isRanked_not: Boolean
   isFinished: Boolean
@@ -214,9 +219,14 @@ type Mutation {
   deleteLeague(where: LeagueWhereUniqueInput!): League
   createTeam(data: TeamCreateInput!): Team!
   deleteTeam(where: TeamWhereUniqueInput!): Team
-  createUser(data: UserCreateInput!): User!
+  loginOrRegisterUser(data: UserCreateInput!): User!
+  addUserToTeam(
+    where: TeamWhereUniqueInput!
+    data: UserWhereUniqueInput!
+  ): Team!
   deleteUser: User
   createMatch(data: MatchCreateInput!): Match!
+  endMatch(where: MatchWhereUniqueInput!, data: MatchEndInput!): Match!
   deleteMatch(where: MatchWhereUniqueInput!): Match
 }
 

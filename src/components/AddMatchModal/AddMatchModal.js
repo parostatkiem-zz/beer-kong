@@ -59,11 +59,11 @@ const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
 const AddMatchModal = ({ leagueId, usersToChoseFrom }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [addMatch] = useMutation(CREATE_MATCH, {
-    refetchQueries: [{ query: GET_LEAGUE }],
+    refetchQueries: [{ query: GET_LEAGUE, variables: { id: leagueId } }],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
 
   const [user1, setUser1] = useState(usersToChoseFrom[0].id);
   const [user2, setUser2] = useState(usersToChoseFrom[1].id);

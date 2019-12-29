@@ -33,3 +33,15 @@ export const CREATE_MATCH = gql`
     }
   }
 `;
+
+export const ADD_USER_TO_TEAM = gql`
+  mutation AddUserToTeam(
+    $where: TeamWhereUniqueInput!
+    $data: UserWhereUniqueInput!
+  ) {
+    addUserToTeam(where: $where, data: $data) {
+      name
+      id
+    }
+  }
+`;

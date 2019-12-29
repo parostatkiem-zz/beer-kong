@@ -8,44 +8,82 @@ import {
   Form,
   FormGroup,
   InputGroup,
-  Input
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  Label
 } from "reactstrap";
+import ReactDatetime from "react-datetime";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { ADD_TEAM } from "gql/mutations";
 import { useMutation } from "@apollo/react-hooks";
-import { GET_LEAGUES } from "gql/queries";
 import ErrorModal from "components/ErrorModal/ErrorModal";
+import { CREATE_MATCH } from "gql/mutations";
 import { GET_LEAGUE } from "gql/queries";
+import { ADD_USER_TO_TEAM } from "gql/mutations";
+import { GET_TEAM } from "gql/queries";
 
-const AddTeamModal = ({ leagueId }) => {
+const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
+  const [search, setSearch] = useState("");
+
+  return (
+    <>
+      <Label htmlFor={label}>{label}</Label>
+      <InputGroup className="input-group-alternative">
+        <Input
+          type="search"
+          name="search"
+          id="exampleSearch"
+          placeholder="Wpisz nazwę, by zawęzić listę"
+          onChange={e => setSearch(e.target.value)}
+        />
+      </InputGroup>
+      <Input
+        required
+        type="select"
+        id={label}
+        onChange={e => (e = setUserFn(e.target.value))}
+      >
+        {allUsers
+          .filter(
+            u => u.id !== userToExclude && u.name.match(new RegExp(search, "i"))
+          )
+          .map(u => (
+            <option value={u.id} key={u.id}>
+              {u.name}
+            </option>
+          ))}
+      </Input>
+    </>
+  );
+};
+
+const AddUserToTeamModal = ({ teamId, usersToChoseFrom }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [addTeam] = useMutation(ADD_TEAM, {
-    refetchQueries: [
-      { query: GET_LEAGUES },
-      { query: GET_LEAGUE, variables: { id: leagueId } }
-    ],
+  const [addUserToTeam] = useMutation(ADD_USER_TO_TEAM, {
+    refetchQueries: [{ query: GET_TEAM, variables: { id: teamId } }],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });
   const [isOpen, setOpen] = useState(false);
 
+  const [user1, setUser1] = useState(
+    (usersToChoseFrom.length && usersToChoseFrom[0].id) || null
+  );
+
   const formElement = useRef(null);
-  const formValues = {
-    name: useRef(null),
-    description: useRef(null)
-  };
 
   function handleFormSubmit(e) {
     if (formElement.current.reportValidity()) {
       const data = {
-        name: formValues.name.current.value,
-        description: formValues.description.current.value,
-        league: {
-          id: leagueId
-        }
+        where: { id: teamId },
+        data: { id: user1 }
       };
-      addTeam({ variables: { data } });
+      console.log(data);
+      addUserToTeam({ variables: { ...data } });
+    } else {
+      setErrorMessage("Wszystkie pola muszą być wypełnione");
+      return false;
     }
     setOpen(false);
     return false;
@@ -54,8 +92,8 @@ const AddTeamModal = ({ leagueId }) => {
     <>
       {errorMessage && <ErrorModal text={errorMessage} />}
       <Button
-        className="btn-icon ml-auto"
-        size="sm"
+        className="btn-icon"
+        block
         color="primary"
         type="button"
         onClick={() => setOpen(true)}
@@ -63,7 +101,7 @@ const AddTeamModal = ({ leagueId }) => {
         <span className="btn-inner--icon">
           <FontAwesomeIcon icon={faPlus} />
         </span>
-        <span className="btn-inner--text">Załóż drużynę</span>
+        <span className="btn-inner--text">Dodaj gracza</span>
       </Button>
       <Modal
         className="modal-dialog-centered"
@@ -75,7 +113,7 @@ const AddTeamModal = ({ leagueId }) => {
           <Card className="bg-secondary shadow border-0">
             <CardHeader className="bg-transparent pb-3 text-center">
               <div className="text-muted text-center">
-                Formularz zakładania drużyny
+                Formularz dodawania gracza do drużyny
               </div>
 
               <button
@@ -94,29 +132,11 @@ const AddTeamModal = ({ leagueId }) => {
                 innerRef={formElement}
                 onSubmit={handleFormSubmit}
               >
-                <FormGroup className="mb-3">
-                  <InputGroup className="input-group-alternative ">
-                    <Input
-                      innerRef={formValues.name}
-                      placeholder="Nazwa"
-                      type="text"
-                      required
-                      pattern="[A-Za-z ]+"
-                    />
-                  </InputGroup>
-                </FormGroup>
                 <FormGroup>
-                  <InputGroup className="input-group-alternative">
-                    <Input
-                      innerRef={formValues.description}
-                      id="exampleFormControlTextarea1"
-                      placeholder="Opis, zasady ..."
-                      rows="3"
-                      type="textarea"
-                      className="form-control-alternative"
-                      required
-                    />
-                  </InputGroup>
+                  <UserSelector
+                    setUserFn={setUser1}
+                    allUsers={usersToChoseFrom}
+                  />
                 </FormGroup>
 
                 <div className="text-center">
@@ -138,4 +158,4 @@ const AddTeamModal = ({ leagueId }) => {
   );
 };
 
-export default AddTeamModal;
+export default AddUserToTeamModal;
