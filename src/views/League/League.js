@@ -33,59 +33,13 @@ import ErrorModal from "components/ErrorModal/ErrorModal";
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import AddTeamModal from "./../../components/AddTeamModal/AddTeamModal";
 import AddMatchModal from "components/AddMatchModal/AddMatchModal";
-
-const mockMatchesPlayed = [
-  {
-    player1: "Jan Kowalski",
-    player2: "Filip Strózik",
-    date: new Date(2019, 11, 3).toLocaleDateString(),
-    winner: 2,
-    looserPoints: 6
-  },
-  {
-    player1: "Natalia",
-    player2: "Klaudia",
-    date: new Date(2019, 10, 5).toLocaleDateString(),
-    winner: 1,
-    looserPoints: 7
-  },
-  {
-    player1: "Tobik",
-    player2: "Bunia",
-    date: new Date(2019, 5, 12).toLocaleDateString(),
-    winner: 1,
-    looserPoints: 2
-  }
-];
-
-const mockMatchesUnplayed = [
-  {
-    player1: "Jan Kowalski",
-    player2: "Filip Strózik"
-    //  date: new Date(2019, 11, 3).toLocaleDateString()
-  },
-  {
-    player1: "Natalia",
-    player2: "Klaudia"
-    //  date: new Date(2019, 10, 5).toLocaleDateString()
-  },
-  {
-    player1: "Tobik",
-    player2: "Bunia"
-    // date: new Date(2019, 5, 12).toLocaleDateString()
-  }
-];
-
-const mockUsers = [
-  { id: "123", name: "Jan Sudczak" },
-  { id: "4535", name: "Filip Strozik" },
-  { id: "756756", name: "Klaudusia" },
-  { id: "542354", name: "Klakson" },
-  { id: "12134242343", name: "Tobik" }
-];
+import { GET_MATCHES_WITHIN_LEAGUE } from "gql/queries";
 
 const League = ({ id }) => {
   const league = useQuery(GET_LEAGUE, { variables: { id } });
+  const matches = useQuery(GET_MATCHES_WITHIN_LEAGUE, {
+    variables: { where: { league: { id } } }
+  });
   const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
   const { userInfo } = useContext(UserInfoContext);
   if (league.error) {
@@ -234,17 +188,32 @@ const League = ({ id }) => {
 
       <section className="mt-3">
         <SectionHeader size="s" title="Rozegrane mecze" icon={faFutbol} />
-        {mockMatchesPlayed.map(match => (
-          <Match key={match.player1 + match.player2} {...match} />
-        ))}
+        {matches.error || matches.loading ? (
+          <LoadingBar />
+        ) : (
+          matches.data.matches
+            .filter(m => m.isFinished)
+            .map(m => <Match key={m.id} {...m} />)
+        )}
       </section>
 
+      <section className="mt-3">
+        <SectionHeader size="s" title="Planowane mecze" icon={faFutbol} />
+        {matches.error || matches.loading ? (
+          <LoadingBar />
+        ) : (
+          matches.data.matches
+            .filter(m => !m.isFinished)
+            .map(m => <Match key={m.id} {...m} />)
+        )}
+      </section>
+      {/* 
       <section className="mt-3">
         <SectionHeader title="Planowane mecze" icon={faBowlingBall} />
         {mockMatchesUnplayed.map(match => (
           <Match key={match.player1 + match.player2} {...match} />
         ))}
-      </section>
+      </section> */}
     </Container>
   );
 };

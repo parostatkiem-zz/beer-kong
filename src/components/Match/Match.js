@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Jumbotron, Badge } from "reactstrap";
+import React from "react";
+import { Jumbotron } from "reactstrap";
 import "./Match.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,27 +10,47 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import useDate from "hooks/UseDate";
 
-const Match = ({ player1, player2, date, winner = null, looserPoints }) => {
+const Match = ({
+  user1,
+  user2,
+  plannedAt,
+  winner = null,
+  user1Points,
+  user2Points,
+  isFinished
+}) => {
+  const date = useDate(plannedAt);
   return (
-    <Jumbotron className={classNames("match", { unplayed: winner === null })}>
-      <div className={classNames(["player", "left", { winner: winner === 1 }])}>
-        {winner === 1 ? (
+    <Jumbotron className={classNames("match", { unplayed: !isFinished })}>
+      <div
+        className={classNames([
+          "player",
+          "left",
+          { winner: winner && winner.id === user1.id }
+        ])}
+      >
+        {winner && winner.id === user1.id ? (
           <FontAwesomeIcon className="trophy" icon={faTrophy} />
         ) : (
           <span></span>
         )}
-        <Link to="/player/1">{player1}</Link>
-        <span className="points">{winner === 1 ? 10 : looserPoints}</span>
+        <Link to={"/player/" + user1.id}>{user1.name}</Link>
+        <span className="points">{user1Points}</span>
       </div>
       <FontAwesomeIcon className="bolt_icon" icon={faBolt} />
       <span className="date">{date}</span>
       <div
-        className={classNames(["player", "right", { winner: winner === 2 }])}
+        className={classNames([
+          "player",
+          "right",
+          { winner: winner && winner.id === user2.id }
+        ])}
       >
-        <span className="points">{winner === 2 ? 10 : looserPoints}</span>
-        <Link to="/player/1">{player2}</Link>
-        {winner === 2 ? (
+        <span className="points">{user2Points}</span>
+        <Link to={"/player/" + user2.id}>{user2.name}</Link>
+        {winner && winner.id === user2.id ? (
           <FontAwesomeIcon className="trophy" icon={faTrophy} />
         ) : (
           <span></span>

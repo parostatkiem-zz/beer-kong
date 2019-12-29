@@ -85,7 +85,7 @@ const AddMatchModal = ({ leagueId, usersToChoseFrom }) => {
         league: { id: leagueId },
         isRanked: true
       };
-      console.log(data);
+
       addMatch({ variables: { data } });
     } else {
       setErrorMessage("Wszystkie pola muszą być wypełnione");

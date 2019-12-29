@@ -9,7 +9,6 @@ import {
   Badge,
   ListGroupItem,
   CardHeader,
-  CardFooter,
   Progress
 } from "reactstrap";
 import {
