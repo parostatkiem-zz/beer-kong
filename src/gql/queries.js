@@ -1,4 +1,5 @@
 import { gql } from "apollo-boost";
+import { classNames } from "classnames";
 
 export const GET_LEAGUES = gql`
   query Leagues {
@@ -19,6 +20,7 @@ export const GET_LEAGUE = gql`
   query League($id: ID) {
     league(where: { id: $id }) {
       name
+      id
       description
       users {
         name
@@ -33,6 +35,17 @@ export const GET_LEAGUE = gql`
         id
         owner {
           id
+        }
+      }
+      users {
+        name
+        id
+        teams {
+          name
+          id
+          league {
+            id
+          }
         }
       }
     }

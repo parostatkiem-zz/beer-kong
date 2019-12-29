@@ -4,7 +4,7 @@ import "./PageHeader.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 
-const PageHeader = ({ children, value, icon, kind }) => {
+const PageHeader = ({ children, value, icon, kind, actions }) => {
   return (
     <Card className={classNames(["shadow", "border-0", "page-header", "mb-3"])}>
       <CardBody className="">
@@ -17,6 +17,11 @@ const PageHeader = ({ children, value, icon, kind }) => {
             <h1 className="number">{value}</h1>
             {children}
           </Col>
+          {actions && (
+            <Col className="actions" lg={{ size: "auto" }}>
+              {actions}
+            </Col>
+          )}
         </Row>
       </CardBody>
     </Card>

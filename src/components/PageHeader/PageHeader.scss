@@ -1,59 +1,62 @@
 .page-header {
+  $darkGrey: #8898aa;
+  $lightGrey: #e9ecef;
 
-    $darkGrey: #8898aa;
-    $lightGrey: #e9ecef;
+  .card-body {
+    padding: 0;
+  }
 
-    .card-body {
-        padding: 0;
-    }
+  .top-row {
+    justify-content: center;
+    align-items: stretch;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    padding: 0 2em;
+  }
 
-    .top-row {
-        justify-content: center;
-        align-items: stretch;
-    }
+  .icon-column {
+    min-width: 11em;
+    display: flex;
+    background: $lightGrey;
+    overflow: hidden;
+    margin: 0 15px;
+    border-radius: 0.25rem 0 0 0.25rem;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
 
-    .icon-column {
-        min-width: 11em;
-        display: flex;
-        background: $lightGrey;
-        overflow: hidden;
-        margin: 0 15px;
-        border-radius: 0.25rem 0 0 0.25rem;
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-    }
+  .text-column {
+    padding: 1em 1.5em;
+  }
 
-    .text-column {
-        padding: 1em 1.5em;
-    }
+  .number {
+    color: #fb6340;
+    font-size: 3em;
+    font-weight: bold;
+  }
 
-    .number {
-        color: #fb6340;
-        font-size: 3em;
-        font-weight: bold;
-    }
+  .icon {
+    flex-grow: 9;
+    color: $darkGrey;
+    flex-shrink: 2;
 
-    .icon {
-        flex-grow: 9;
-        color: $darkGrey;
-        flex-shrink: 2;
+    margin: 0.2em;
+  }
 
-        margin: 0.2em;
-    }
-
-    .kind {
-        text-transform: uppercase;
-        text-align: center;
-        margin: 0 auto;
-        display: block;
-        width: 100%;
-        left: 0;
-        font-size: 1.2em;
-        flex-grow: 1;
-        flex-shrink: 1;
-        background: $darkGrey;
-        color: $lightGrey;
-    }
-
+  .kind {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+    left: 0;
+    font-size: 1.2em;
+    flex-grow: 1;
+    flex-shrink: 1;
+    background: $darkGrey;
+    color: $lightGrey;
+  }
 }

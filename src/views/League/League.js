@@ -32,6 +32,7 @@ import useDate from "hooks/UseDate";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import AddTeamModal from "./../../components/AddTeamModal/AddTeamModal";
+import AddMatchModal from "components/AddMatchModal/AddMatchModal";
 
 const mockMatchesPlayed = [
   {
@@ -75,6 +76,14 @@ const mockMatchesUnplayed = [
   }
 ];
 
+const mockUsers = [
+  { id: "123", name: "Jan Sudczak" },
+  { id: "4535", name: "Filip Strozik" },
+  { id: "756756", name: "Klaudusia" },
+  { id: "542354", name: "Klakson" },
+  { id: "12134242343", name: "Tobik" }
+];
+
 const League = ({ id }) => {
   const league = useQuery(GET_LEAGUE, { variables: { id } });
   const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
@@ -95,6 +104,15 @@ const League = ({ id }) => {
               icon={faChess}
               kind="Liga"
               value={league.data.league.name}
+              actions={
+                (userInfo && userInfo.id === league.data.league.owner.id && (
+                  <AddMatchModal
+                    leagueId={league.data.league.id}
+                    usersToChoseFrom={mockUsers}
+                  />
+                )) ||
+                null
+              }
             >
               <h6>{league.data.league.description}</h6>
             </PageHeader>
@@ -144,7 +162,7 @@ const League = ({ id }) => {
                   <FontAwesomeIcon icon={faUsers} color="#fb6340" /> Ranking
                   drużyn
                 </h5>
-                <AddTeamModal leagueId={id} />
+                {userInfo && <AddTeamModal leagueId={id} />}
               </CardHeader>
               <ListGroup>
                 {league.data.league.teams.map(team => (
@@ -154,7 +172,7 @@ const League = ({ id }) => {
                     href={"/team/" + team.id}
                     className="justify-content-between d-flex"
                   >
-                    {team.owner.id === userInfo.id ? (
+                    {userInfo && team.owner.id === userInfo.id ? (
                       <>
                         <strong> {team.name}</strong>
                         <Badge color="primary">założyciel</Badge>
@@ -187,41 +205,23 @@ const League = ({ id }) => {
         />
         <Card className="shadow border-0 mb-3">
           <ListGroup>
-            <ListGroupItem className="d-flex justify-content-between">
-              <div>
-                <Link to="/player/1">Filip Strózik</Link>{" "}
-                <Link to="/team/1">
-                  <Badge color="primary">Nygusy z Konarskiego</Badge>
-                </Link>
-              </div>
-              <Badge color="warning">
-                <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 21
-              </Badge>
-            </ListGroupItem>
-            <ListGroupItem className="d-flex justify-content-between">
-              {" "}
-              <div>
-                <Link to="/player/1">Jan Sudczak</Link>{" "}
-                <Link to="/team/1">
-                  <Badge color="primary">HGW squad</Badge>
-                </Link>{" "}
-              </div>
-              <Badge color="warning">
-                <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 18
-              </Badge>
-            </ListGroupItem>
-            <ListGroupItem className="d-flex justify-content-between">
-              {" "}
-              <div>
-                <Link to="/player/1">Klaudia</Link>{" "}
-                <Link to="/team/1">
-                  <Badge color="primary">Nygusy z Konarskiego</Badge>
-                </Link>{" "}
-              </div>
-              <Badge color="warning">
-                <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 11
-              </Badge>
-            </ListGroupItem>
+            {league.data.league.users.map(u => (
+              <ListGroupItem
+                key={u.id}
+                className="d-flex justify-content-between"
+              >
+                <div>
+                  <Link to={"/player/" + u.id}>{u.name}</Link>{" "}
+                  <Link to="/team/1">
+                    <Badge color="primary">Nygusy z Konarskiego</Badge>
+                  </Link>
+                </div>
+                <Badge color="warning">
+                  {/* TODO */}
+                  <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 21
+                </Badge>
+              </ListGroupItem>
+            ))}
           </ListGroup>
         </Card>
       </section>

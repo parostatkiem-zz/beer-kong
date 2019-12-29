@@ -25,3 +25,11 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const CREATE_MATCH = gql`
+  mutation CreateMatch($data: MatchCreateInput!) {
+    createMatch(data: $data) {
+      name
+    }
+  }
+`;

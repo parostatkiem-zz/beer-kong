@@ -95,6 +95,120 @@ input LeagueWhereUniqueInput {
   name: String
 }
 
+type Match {
+  id: ID!
+  createdAt: DateTime!
+  expiration: DateTime!
+  isRanked: Boolean!
+  isFinished: Boolean
+  league: League!
+  user1: User!
+  user1points: Int
+  user2: User!
+  user2points: Int
+  winner: User
+  winnerpoints: Int
+}
+
+input MatchCreateInput {
+  expiration: DateTime!
+  isRanked: Boolean!
+  league: LeagueWhereUniqueInput!
+  user1: UserWhereUniqueInput!
+  user2: UserWhereUniqueInput!
+}
+
+enum MatchOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  expiration_ASC
+  expiration_DESC
+  isRanked_ASC
+  isRanked_DESC
+  isFinished_ASC
+  isFinished_DESC
+  user1points_ASC
+  user1points_DESC
+  user2points_ASC
+  user2points_DESC
+  winnerpoints_ASC
+  winnerpoints_DESC
+}
+
+input MatchWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  expiration: DateTime
+  expiration_not: DateTime
+  expiration_in: [DateTime!]
+  expiration_not_in: [DateTime!]
+  expiration_lt: DateTime
+  expiration_lte: DateTime
+  expiration_gt: DateTime
+  expiration_gte: DateTime
+  isRanked: Boolean
+  isRanked_not: Boolean
+  isFinished: Boolean
+  isFinished_not: Boolean
+  league: LeagueWhereInput
+  user1: UserWhereInput
+  user1points: Int
+  user1points_not: Int
+  user1points_in: [Int!]
+  user1points_not_in: [Int!]
+  user1points_lt: Int
+  user1points_lte: Int
+  user1points_gt: Int
+  user1points_gte: Int
+  user2: UserWhereInput
+  user2points: Int
+  user2points_not: Int
+  user2points_in: [Int!]
+  user2points_not_in: [Int!]
+  user2points_lt: Int
+  user2points_lte: Int
+  user2points_gt: Int
+  user2points_gte: Int
+  winner: UserWhereInput
+  winnerpoints: Int
+  winnerpoints_not: Int
+  winnerpoints_in: [Int!]
+  winnerpoints_not_in: [Int!]
+  winnerpoints_lt: Int
+  winnerpoints_lte: Int
+  winnerpoints_gt: Int
+  winnerpoints_gte: Int
+  AND: [MatchWhereInput!]
+  OR: [MatchWhereInput!]
+  NOT: [MatchWhereInput!]
+}
+
+input MatchWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createLeague(data: LeagueCreateInput!): League!
   deleteLeague(where: LeagueWhereUniqueInput!): League
@@ -102,6 +216,8 @@ type Mutation {
   deleteTeam(where: TeamWhereUniqueInput!): Team
   createUser(data: UserCreateInput!): User!
   deleteUser: User
+  createMatch(data: MatchCreateInput!): Match!
+  deleteMatch(where: MatchWhereUniqueInput!): Match
 }
 
 type Query {
@@ -135,6 +251,16 @@ type Query {
     first: Int
     last: Int
   ): [User]!
+  match(where: MatchWhereUniqueInput!): Match
+  matches(
+    where: MatchWhereInput
+    orderBy: MatchOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Match]!
 }
 
 type Team {
