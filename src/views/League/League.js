@@ -32,6 +32,7 @@ import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import AddTeamModal from "./../../components/AddTeamModal/AddTeamModal";
 import AddMatchModal from "components/AddMatchModal/AddMatchModal";
 import { GET_MATCHES_WITHIN_LEAGUE } from "gql/queries";
+import NoEntriesInfo from "components/NoEntriesInfo/NoEntriesInfo";
 
 const League = ({ id }) => {
   const league = useQuery(GET_LEAGUE, { variables: { id } });
@@ -152,46 +153,51 @@ const League = ({ id }) => {
         </Row>
       </section>
       <section className="mt-3">
-        <SectionHeader
-          size="s"
-          title="Ranking użytkowników"
-          icon={faUserAstronaut}
-        />
-        <Card className="shadow border-0 mb-3">
-          <ListGroup>
-            {league.data.league.users.map(u => (
-              <ListGroupItem
-                key={u.id}
-                className="d-flex justify-content-between"
-              >
-                <div>
-                  <Link to={"/player/" + u.id}>{u.name}</Link>{" "}
-                  <Link
-                    to={"/team/" + u.teams.find(t => t.league.id === id).id}
-                  >
-                    <Badge color="primary">
-                      {u.teams.find(t => t.league.id === id).name}
-                    </Badge>
-                  </Link>
-                </div>
-                <Badge color="warning">
-                  {/* TODO */}
-                  <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 21
-                </Badge>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
-        </Card>
+        <SectionHeader size="s" title="Ranking graczy" icon={faUserAstronaut} />
+        {league.data.league.users.length ? (
+          <Card className="shadow border-0 mb-3">
+            <ListGroup>
+              {league.data.league.users.map(u => (
+                <ListGroupItem
+                  key={u.id}
+                  className="d-flex justify-content-between"
+                >
+                  <div>
+                    <Link to={"/player/" + u.id}>{u.name}</Link>{" "}
+                    <Link
+                      to={"/team/" + u.teams.find(t => t.league.id === id).id}
+                    >
+                      <Badge color="primary">
+                        {u.teams.find(t => t.league.id === id).name}
+                      </Badge>
+                    </Link>
+                  </div>
+                  <Badge color="warning">
+                    {/* TODO */}
+                    <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 21
+                  </Badge>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Card>
+        ) : (
+          <NoEntriesInfo>W tej lidze nie ma jeszcze graczy</NoEntriesInfo>
+        )}
       </section>
 
       <section className="mt-3">
         <SectionHeader size="s" title="Rozegrane mecze" icon={faFutbol} />
+
         {matches.error || matches.loading ? (
           <LoadingBar />
-        ) : (
+        ) : matches.data.matches.length ? (
           matches.data.matches
             .filter(m => m.isFinished)
             .map(m => <Match key={m.id} {...m} />)
+        ) : (
+          <NoEntriesInfo>
+            W tej lidze odbył się jeszcze żaden mecz
+          </NoEntriesInfo>
         )}
       </section>
 
@@ -199,10 +205,14 @@ const League = ({ id }) => {
         <SectionHeader size="s" title="Planowane mecze" icon={faFutbol} />
         {matches.error || matches.loading ? (
           <LoadingBar />
-        ) : (
+        ) : matches.data.matches.length ? (
           matches.data.matches
             .filter(m => !m.isFinished)
             .map(m => <Match key={m.id} {...m} />)
+        ) : (
+          <NoEntriesInfo>
+            W tej lidze odbył się jeszcze żaden mecz
+          </NoEntriesInfo>
         )}
       </section>
       {/* 

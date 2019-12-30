@@ -1,0 +1,45 @@
+.no-entries-info {
+
+    $verticalDrop: -1.3em;
+    $verticalBase: -0.4em;
+    $horizontalSpace: 0.55em;
+
+    padding-left: calc(#{$horizontalSpace} * 4);
+    padding-right: $horizontalSpace;
+    position: relative;
+    display: inline-block;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+
+    @keyframes spin-left-right {
+        0% {
+            left: 0;
+            top: $verticalBase;
+        }
+
+        10% {
+            top: $verticalDrop;
+        }
+
+        90% {
+            top: $verticalDrop;
+        }
+
+        100% {
+            top: $verticalBase;
+            left: 100%;
+            transform: rotate(1400deg);
+        }
+
+    }
+
+    .icon {
+        left: 0;
+        top: $verticalBase;
+        font-size: 1.6em;
+        position: absolute;
+        animation: spin-left-right 2s ease-in-out infinite alternate;
+        animation-delay: calc(#{random(1000)} * 0.01s);
+    }
+}
