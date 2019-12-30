@@ -17,7 +17,6 @@ import {
   faTrophy,
   faUserAstronaut
 } from "@fortawesome/free-solid-svg-icons";
-import SectionHeader from "components/SectionHeader/SectionHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddUserToTeamModal from "components/AddUserToTeamModal/AddUserToTeamModal";
 import { useQuery } from "@apollo/react-hooks";

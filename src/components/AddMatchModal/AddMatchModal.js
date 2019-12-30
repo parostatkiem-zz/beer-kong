@@ -56,7 +56,7 @@ const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
   );
 };
 
-const AddMatchModal = ({ leagueId, usersToChoseFrom }) => {
+const AddMatchModal = ({ leagueId, usersToChoseFrom = [] }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [addMatch] = useMutation(CREATE_MATCH, {
     refetchQueries: [{ query: GET_LEAGUE, variables: { id: leagueId } }],
@@ -65,10 +65,10 @@ const AddMatchModal = ({ leagueId, usersToChoseFrom }) => {
   });
   const [isOpen, setOpen] = useState(false);
   const [user1, setUser1] = useState(
-    (usersToChoseFrom && usersToChoseFrom[0].id) || null
+    (usersToChoseFrom.length && usersToChoseFrom[0].id) || null
   );
   const [user2, setUser2] = useState(
-    (usersToChoseFrom && usersToChoseFrom[1].id) || null
+    (usersToChoseFrom.length && usersToChoseFrom[1].id) || null
   );
 
   const formElement = useRef(null);

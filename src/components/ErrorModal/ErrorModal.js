@@ -1,20 +1,5 @@
 import React, { useState } from "react";
-// reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Modal,
-  Row,
-  Col
-} from "reactstrap";
+import { Button, Modal, Row, Col } from "reactstrap";
 
 function ErrorModal({ text, title = "Ups, coś poszło nie tak" }) {
   const [isOpen, setOpen] = useState(true);

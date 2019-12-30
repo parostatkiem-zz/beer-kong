@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-
 import Counter from "../../components/Counter/Counter";
 import {
   Container,
@@ -16,7 +15,6 @@ import SectionHeader from "components/SectionHeader/SectionHeader";
 import {
   faUserAstronaut,
   faFutbol,
-  faBowlingBall,
   faUsers,
   faChess,
   faTrophy

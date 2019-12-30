@@ -40,8 +40,9 @@ const AddLeagueModal = () => {
         users: []
       };
       addLeague({ variables: { data } });
+      setOpen(false);
     }
-    setOpen(false);
+
     return false;
   }
   return (

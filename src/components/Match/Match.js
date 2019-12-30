@@ -2,12 +2,7 @@ import React from "react";
 import { Jumbotron } from "reactstrap";
 import "./Match.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSlash,
-  faEdit,
-  faBolt,
-  faTrophy
-} from "@fortawesome/free-solid-svg-icons";
+import { faBolt, faTrophy } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 import useDate from "hooks/UseDate";
