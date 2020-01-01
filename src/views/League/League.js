@@ -77,8 +77,12 @@ const League = ({ id }) => {
           <Col lg={4} sm={12}>
             <Row>
               <Col lg={12} sm={4}>
-                <Counter icon={faFutbol} size="s" value={35}>
-                  Rozegranych meczów
+                <Counter
+                  icon={faFutbol}
+                  size="s"
+                  value={matches.data ? matches.data.matches.length : "..."}
+                >
+                  Meczów
                 </Counter>
               </Col>
               <Col lg={12} sm={4}>
@@ -193,7 +197,7 @@ const League = ({ id }) => {
         ) : matches.data.matches.length ? (
           matches.data.matches
             .filter(m => m.isFinished)
-            .map(m => <Match key={m.id} {...m} />)
+            .map(m => <Match leagueId={id} key={m.id} {...m} />)
         ) : (
           <NoEntriesInfo>
             W tej lidze odbył się jeszcze żaden mecz
@@ -208,7 +212,7 @@ const League = ({ id }) => {
         ) : matches.data.matches.length ? (
           matches.data.matches
             .filter(m => !m.isFinished)
-            .map(m => <Match key={m.id} {...m} />)
+            .map(m => <Match leagueId={id} key={m.id} {...m} />)
         ) : (
           <NoEntriesInfo>
             W tej lidze odbył się jeszcze żaden mecz

@@ -34,6 +34,14 @@ export const CREATE_MATCH = gql`
   }
 `;
 
+export const END_MATCH = gql`
+  mutation EndMatch($where: MatchWhereUniqueInput!, $data: MatchEndInput!) {
+    endMatch(where: $where, data: $data) {
+      id
+    }
+  }
+`;
+
 export const ADD_USER_TO_TEAM = gql`
   mutation AddUserToTeam(
     $where: TeamWhereUniqueInput!

@@ -14,12 +14,28 @@
     &.unplayed {
         margin-bottom: 1.2em;
 
-        .bolt_icon {
+        .points {
+            visibility: hidden;
+            font-size: 1px;
+            width: 0;
+            height: 0;
+        }
 
+        .bolt_icon {
             font-size: 3.8em;
             filter: drop-shadow(2px 2px 3px black);
-            //    transform: translateY(-0.08em);
+            transform: translateY(-0.08em);
             color: #5e72e4;
+        }
+
+        .date {
+            transform: translateY(1.55em) rotate(-8deg);
+            background-color: #f5365c;
+
+            &:hover {
+                background-color: #f5365c;
+            }
+
         }
 
     }
@@ -29,22 +45,36 @@
     .date {
         position: absolute;
         font-size: 0.6em;
-        transform: translateY(2.55em) rotate(-8deg);
+        transform: translateY(2.02em) rotate(-8deg);
         font-weight: bold;
         // color: #f5365c;
         color: black;
         //   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        transition: font-size 0.2s ease-in-out;
+        cursor: pointer;
+        padding: 0 0.4em;
+
+        &:hover {
+            font-size: 0.68em;
+
+            background-color: #5e72e4;
+
+        }
     }
 
     .bolt_icon {
         // $size: 2.5em;
         font-size: 5.7em;
         //height: $size;
-        transform: translateY(-0.08em);
+        padding: 0 0.5em;
+        box-sizing: content-box;
+
+        transform: translateY(-0.12em);
         background: transparent;
         position: absolute;
         color: #f5365c;
         filter: drop-shadow(2px 2px 2px black);
+
     }
 
 
