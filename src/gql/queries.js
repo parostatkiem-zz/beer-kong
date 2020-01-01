@@ -139,3 +139,11 @@ export const GET_MATCHES_WITHIN_LEAGUE = gql`
     }
   }
 `;
+
+export const GET_MATCHES = gql`
+  query Matches($where: MatchWhereInput) {
+    matches(where: $where) {
+      id
+    }
+  }
+`;

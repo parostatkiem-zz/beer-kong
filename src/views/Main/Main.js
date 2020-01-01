@@ -11,13 +11,17 @@ import LeaguesTable from "components/LeaguesTable/LeaguesTable";
 import SectionHeader from "components/SectionHeader/SectionHeader";
 import AddLeagueModal from "components/AddLeagueModal/AddLeagueModal";
 import LoadingBar from "components/LoadingBar/LoadingBar";
-import { GET_LEAGUES, GET_USERS } from "gql/queries";
+import { GET_LEAGUES, GET_USERS, GET_MATCHES } from "gql/queries";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 
 export default function Main(props) {
   const leagues = useQuery(GET_LEAGUES);
   const users = useQuery(GET_USERS);
+  const matches = useQuery(GET_MATCHES, {
+    variables: { where: { isFinished: true } }
+  });
+
   const { userInfo } = useContext(UserInfoContext);
   return (
     <Container className="my-3">
@@ -42,7 +46,11 @@ export default function Main(props) {
             </Counter>
           </Col>
           <Col sm={4} xs={12}>
-            <Counter size="s" icon={faFutbol} value={35}>
+            <Counter
+              size="s"
+              icon={faFutbol}
+              value={matches.data ? matches.data.matches.length : "..."}
+            >
               Rozegranych meczów
             </Counter>
           </Col>
