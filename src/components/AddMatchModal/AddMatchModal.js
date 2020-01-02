@@ -20,10 +20,10 @@ import { useMutation } from "@apollo/react-hooks";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 import { CREATE_MATCH } from "gql/mutations";
 import { GET_LEAGUE } from "gql/queries";
+require("moment/locale/pl");
 
 const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
   const [search, setSearch] = useState("");
-
   return (
     <>
       <Label htmlFor={label}>{label}</Label>
@@ -146,6 +146,7 @@ const AddMatchModal = ({ leagueId, usersToChoseFrom = [] }) => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <ReactDatetime
+                      locale="pl"
                       inputProps={{
                         placeholder: "Wybierz planowaną datę meczu"
                       }}
