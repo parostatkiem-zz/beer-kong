@@ -20,10 +20,10 @@ import {
 
 import "./SingleLeague.scss";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_MATCHES_WITHIN_LEAGUE } from "gql/queries";
+import { GET_MATCHES } from "gql/queries";
 
 const SingleLeague = ({ name, description, id, users, teams }) => {
-  const matches = useQuery(GET_MATCHES_WITHIN_LEAGUE, {
+  const matches = useQuery(GET_MATCHES, {
     variables: { where: { league: { id }, isFinished: true } }
   });
 

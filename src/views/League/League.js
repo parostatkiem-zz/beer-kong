@@ -31,12 +31,12 @@ import ErrorModal from "components/ErrorModal/ErrorModal";
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import AddTeamModal from "./../../components/AddTeamModal/AddTeamModal";
 import AddMatchModal from "components/AddMatchModal/AddMatchModal";
-import { GET_MATCHES_WITHIN_LEAGUE } from "gql/queries";
+import { GET_MATCHES } from "gql/queries";
 import NoEntriesInfo from "components/NoEntriesInfo/NoEntriesInfo";
 
 const League = ({ id }) => {
   const league = useQuery(GET_LEAGUE, { variables: { id } });
-  const matches = useQuery(GET_MATCHES_WITHIN_LEAGUE, {
+  const matches = useQuery(GET_MATCHES, {
     variables: { where: { league: { id } } }
   });
   const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
@@ -140,7 +140,7 @@ const League = ({ id }) => {
                       <span> {team.name}</span>
                     )}
                     <Badge id={team.id} color="warning">
-                      12
+                      {team.points}
                     </Badge>
                     <UncontrolledTooltip
                       delay={0}
@@ -176,9 +176,21 @@ const League = ({ id }) => {
                       </Badge>
                     </Link>
                   </div>
-                  <Badge color="warning">
+                  <Badge id={"won" + u.id} color="warning">
                     {/* TODO */}
-                    <FontAwesomeIcon icon={faTrophy} color="#fb6340" /> 21
+                    <UncontrolledTooltip
+                      delay={0}
+                      placement="bottom"
+                      target={"won" + u.id}
+                    >
+                      Ilość wygranych meczów
+                    </UncontrolledTooltip>
+                    <FontAwesomeIcon icon={faTrophy} color="#fb6340" />{" "}
+                    {
+                      u.matches.filter(
+                        m => m.isFinished && m.winner.id === u.id
+                      ).length
+                    }
                   </Badge>
                 </ListGroupItem>
               ))}
@@ -219,13 +231,6 @@ const League = ({ id }) => {
           </NoEntriesInfo>
         )}
       </section>
-      {/* 
-      <section className="mt-3">
-        <SectionHeader title="Planowane mecze" icon={faBowlingBall} />
-        {mockMatchesUnplayed.map(match => (
-          <Match key={match.player1 + match.player2} {...match} />
-        ))}
-      </section> */}
     </Container>
   );
 };

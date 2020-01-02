@@ -21,6 +21,7 @@ export const GET_LEAGUE = gql`
       name
       id
       description
+
       users {
         name
       }
@@ -32,6 +33,7 @@ export const GET_LEAGUE = gql`
       teams {
         name
         id
+        points
         owner {
           id
         }
@@ -43,9 +45,16 @@ export const GET_LEAGUE = gql`
       users {
         name
         id
+        matches {
+          isFinished
+          winner {
+            id
+          }
+        }
         teams {
           name
           id
+
           league {
             id
           }
@@ -103,6 +112,12 @@ export const GET_TEAM = gql`
         name
       }
       users {
+        matches {
+          isFinished
+          winner {
+            id
+          }
+        }
         id
         name
         leagues {
@@ -117,7 +132,7 @@ export const GET_TEAM = gql`
   }
 `;
 
-export const GET_MATCHES_WITHIN_LEAGUE = gql`
+export const GET_MATCHES = gql`
   query Matches($where: MatchWhereInput) {
     matches(where: $where) {
       id
@@ -126,24 +141,22 @@ export const GET_MATCHES_WITHIN_LEAGUE = gql`
       user1 {
         id
         name
+        teams {
+          id
+        }
       }
       user2 {
         id
         name
+        teams {
+          id
+        }
       }
       user1points
       user2points
       winner {
         id
       }
-    }
-  }
-`;
-
-export const GET_MATCHES = gql`
-  query Matches($where: MatchWhereInput) {
-    matches(where: $where) {
-      id
     }
   }
 `;

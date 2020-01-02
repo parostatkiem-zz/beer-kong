@@ -13,9 +13,9 @@ import {
 import PageHeader from "components/PageHeader/PageHeader";
 import {
   faUsers,
-  faChess,
   faTrophy,
-  faUserAstronaut
+  faUserAstronaut,
+  faFutbol
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AddUserToTeamModal from "components/AddUserToTeamModal/AddUserToTeamModal";
@@ -27,11 +27,25 @@ import LoadingBar from "components/LoadingBar/LoadingBar";
 import useDate from "hooks/UseDate";
 import { GET_USERS } from "gql/queries";
 import { Link } from "react-router-dom";
+import { GET_MATCHES } from "gql/queries";
+import Match from "components/Match/Match";
+import SectionHeader from "components/SectionHeader/SectionHeader";
+import NoEntriesInfo from "components/NoEntriesInfo/NoEntriesInfo";
 
 const Team = ({ id }) => {
   const team = useQuery(GET_TEAM, { variables: { id } });
-
   const users = useQuery(GET_USERS);
+  const matches = useQuery(GET_MATCHES);
+
+  const plannedMatches = matches.data
+    ? matches.data.matches
+        .filter(
+          m =>
+            (!m.isFinished && m.user1.teams.some(t => t.id === id)) ||
+            m.user2.teams.some(t => t.id === id)
+        )
+        .map(m => <Match leagueId={id} key={m.id} {...m} />)
+    : [];
 
   const { userInfo } = useContext(UserInfoContext);
   const createdAt = useDate(team.data ? team.data.team.createdAt : 0);
@@ -96,16 +110,22 @@ const Team = ({ id }) => {
                     {u.id === team.data.team.owner.id && (
                       <Badge color="primary">założyciel</Badge>
                     )}
-                    <Badge id="test6" color="warning">
-                      12
+                    <Badge id={"won" + u.id} color="warning">
+                      {/* TODO */}
+                      <UncontrolledTooltip
+                        delay={0}
+                        placement="bottom"
+                        target={"won" + u.id}
+                      >
+                        Ilość wygranych meczów
+                      </UncontrolledTooltip>
+                      <FontAwesomeIcon icon={faTrophy} color="#fb6340" />{" "}
+                      {
+                        u.matches.filter(
+                          m => m.isFinished && m.winner.id === u.id
+                        ).length
+                      }
                     </Badge>
-                    <UncontrolledTooltip
-                      delay={0}
-                      placement="bottom"
-                      target="test6"
-                    >
-                      Punkty zdobyte przez gracza
-                    </UncontrolledTooltip>
                   </ListGroupItem>
                 ))}
               </ListGroup>
@@ -136,208 +156,16 @@ const Team = ({ id }) => {
       </section>
 
       <section className="mt-3">
-        {" "}
-        <h1>TODO: zbliżające się mecze</h1>
-        <Row>
-          <Col sm={6} xs={12}>
-            <Card className="shadow border-0 mb-3">
-              <CardHeader>
-                <h5 className="my-0">
-                  <FontAwesomeIcon icon={faChess} color="#fb6340" />{" "}
-                  <a href="/league/1">Konarskiego oficjalnie </a>
-                </h5>
-                <h5>
-                  <FontAwesomeIcon icon={faTrophy} color="#fb6340" />{" "}
-                  <Badge
-                    id="test12"
-                    style={{ fontSize: "80%" }}
-                    color="primary"
-                  >
-                    1
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test12"
-                  >
-                    Miejsce drużyny w lidze
-                  </UncontrolledTooltip>
-                </h5>
-              </CardHeader>
-              <ListGroup>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  <strong>Filip Strózik </strong>
-                  <Badge color="primary">założyciel</Badge>
-                  <Badge id="test6" color="warning">
-                    12
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test6"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Jan Sudczak
-                  <Badge id="test7" color="warning">
-                    8
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test7"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Klaudia
-                  <Badge id="test9" color="warning">
-                    6
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test9"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Natalia
-                  <Badge id="test77" color="warning">
-                    4
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test77"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-              </ListGroup>
-            </Card>
-          </Col>
-          <Col sm={6} xs={12}>
-            <Card className="shadow border-0 mb-3">
-              <CardHeader>
-                <h5 className="my-0">
-                  <FontAwesomeIcon icon={faChess} color="#fb6340" />{" "}
-                  <a href="/league/1">Konarskiego na luzie </a>
-                </h5>
-                <h5>
-                  <FontAwesomeIcon icon={faTrophy} color="#fb6340" />{" "}
-                  <Badge
-                    id="test12"
-                    style={{ fontSize: "80%" }}
-                    color="primary"
-                  >
-                    6
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test12"
-                  >
-                    Miejsce drużyny w lidze
-                  </UncontrolledTooltip>
-                </h5>
-              </CardHeader>
-              <ListGroup>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  <strong>Filip Strózik </strong>
-                  <Badge color="primary">założyciel</Badge>
-                  <Badge id="test6" color="warning">
-                    6
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test6"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Jan Sudczak
-                  <Badge id="test7" color="warning">
-                    5
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test7"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Klaudia
-                  <Badge id="test9" color="warning">
-                    3
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test9"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-                <ListGroupItem
-                  tag="a"
-                  href="/player/1"
-                  className="justify-content-between d-flex"
-                >
-                  Natalia
-                  <Badge id="test77" color="warning">
-                    0
-                  </Badge>
-                  <UncontrolledTooltip
-                    delay={0}
-                    placement="bottom"
-                    target="test77"
-                  >
-                    Punkty zdobyte przez gracza
-                  </UncontrolledTooltip>
-                </ListGroupItem>
-              </ListGroup>
-            </Card>
-          </Col>
-        </Row>
+        <SectionHeader size="s" title="Planowane mecze" icon={faFutbol} />
+        {matches.error || matches.loading ? (
+          <LoadingBar />
+        ) : plannedMatches.length ? (
+          plannedMatches
+        ) : (
+          <NoEntriesInfo>
+            Nie ma żadnych zaplanowanych meczów dla tej drużyny
+          </NoEntriesInfo>
+        )}
       </section>
     </Container>
   );
