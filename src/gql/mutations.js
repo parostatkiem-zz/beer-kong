@@ -42,6 +42,14 @@ export const END_MATCH = gql`
   }
 `;
 
+export const DELETE_MATCH = gql`
+  mutation DeleteMatch($where: MatchWhereUniqueInput!) {
+    deleteMatch(where: $where) {
+      id
+    }
+  }
+`;
+
 export const ADD_USER_TO_TEAM = gql`
   mutation AddUserToTeam(
     $where: TeamWhereUniqueInput!

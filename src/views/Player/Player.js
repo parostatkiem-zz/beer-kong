@@ -26,7 +26,10 @@ import useDate from "hooks/UseDate";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 
 const Player = ({ id }) => {
-  const user = useQuery(GET_USER, { variables: { id } });
+  const user = useQuery(GET_USER, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL,
+    variables: { id }
+  });
 
   const createdAt = useDate((user.data && user.data.user.createdAt) || null);
 

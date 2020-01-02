@@ -17,6 +17,7 @@ import { useMutation } from "@apollo/react-hooks";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 import { GET_LEAGUE } from "gql/queries";
 import { END_MATCH } from "gql/mutations";
+import { GET_MATCHES } from "gql/queries";
 
 const EditMatchModal = ({
   isOpen,
@@ -24,12 +25,16 @@ const EditMatchModal = ({
   user1,
   user2,
   leagueId,
-  matchId
+  matchId,
+  handleDelete
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [endMatch] = useMutation(END_MATCH, {
-    refetchQueries: [{ query: GET_LEAGUE, variables: { id: leagueId } }],
+    refetchQueries: [
+      { query: GET_LEAGUE, variables: { id: leagueId } },
+      { query: GET_MATCHES, variables: { where: { league: { id: leagueId } } } }
+    ],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });
@@ -125,7 +130,7 @@ const EditMatchModal = ({
                   <Button
                     className="btn-icon"
                     color="danger"
-                    onClick={handleFormSubmit}
+                    onClick={handleDelete}
                     type="button"
                   >
                     <span className="btn-inner--icon">

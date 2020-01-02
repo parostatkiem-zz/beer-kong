@@ -20,6 +20,7 @@ import { useMutation } from "@apollo/react-hooks";
 import ErrorModal from "components/ErrorModal/ErrorModal";
 import { CREATE_MATCH } from "gql/mutations";
 import { GET_LEAGUE } from "gql/queries";
+import { GET_MATCHES } from "gql/queries";
 require("moment/locale/pl");
 
 const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
@@ -59,7 +60,10 @@ const UserSelector = ({ allUsers, setUserFn, label, userToExclude }) => {
 const AddMatchModal = ({ leagueId, usersToChoseFrom = [] }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [addMatch] = useMutation(CREATE_MATCH, {
-    refetchQueries: [{ query: GET_LEAGUE, variables: { id: leagueId } }],
+    refetchQueries: [
+      { query: GET_LEAGUE, variables: { id: leagueId } },
+      { query: GET_MATCHES, variables: { where: { league: { id: leagueId } } } }
+    ],
     onError: e => setErrorMessage(e.message),
     onCompleted: () => setOpen(false)
   });

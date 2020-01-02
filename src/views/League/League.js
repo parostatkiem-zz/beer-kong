@@ -35,8 +35,12 @@ import { GET_MATCHES } from "gql/queries";
 import NoEntriesInfo from "components/NoEntriesInfo/NoEntriesInfo";
 
 const League = ({ id }) => {
-  const league = useQuery(GET_LEAGUE, { variables: { id } });
+  const league = useQuery(GET_LEAGUE, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL,
+    variables: { id }
+  });
   const matches = useQuery(GET_MATCHES, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL,
     variables: { where: { league: { id } } }
   });
   const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
@@ -177,7 +181,6 @@ const League = ({ id }) => {
                     </Link>
                   </div>
                   <Badge id={"won" + u.id} color="warning">
-                    {/* TODO */}
                     <UncontrolledTooltip
                       delay={0}
                       placement="bottom"

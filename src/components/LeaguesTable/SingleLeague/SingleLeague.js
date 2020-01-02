@@ -24,6 +24,7 @@ import { GET_MATCHES } from "gql/queries";
 
 const SingleLeague = ({ name, description, id, users, teams }) => {
   const matches = useQuery(GET_MATCHES, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL,
     variables: { where: { league: { id }, isFinished: true } }
   });
 

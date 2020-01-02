@@ -37,7 +37,9 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
-  defaultOptions: { errorPolicy: "all" }
+  defaultOptions: {
+    errorPolicy: "all"
+  }
 });
 
 var hist = createBrowserHistory();

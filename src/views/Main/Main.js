@@ -16,9 +16,14 @@ import ErrorModal from "components/ErrorModal/ErrorModal";
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 
 export default function Main(props) {
-  const leagues = useQuery(GET_LEAGUES);
-  const users = useQuery(GET_USERS);
+  const leagues = useQuery(GET_LEAGUES, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL
+  });
+  const users = useQuery(GET_USERS, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL
+  });
   const matches = useQuery(GET_MATCHES, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL,
     variables: { where: { isFinished: true } }
   });
 

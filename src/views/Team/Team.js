@@ -33,9 +33,16 @@ import SectionHeader from "components/SectionHeader/SectionHeader";
 import NoEntriesInfo from "components/NoEntriesInfo/NoEntriesInfo";
 
 const Team = ({ id }) => {
-  const team = useQuery(GET_TEAM, { variables: { id } });
-  const users = useQuery(GET_USERS);
-  const matches = useQuery(GET_MATCHES);
+  const team = useQuery(GET_TEAM, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL,
+    variables: { id }
+  });
+  const users = useQuery(GET_USERS, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL
+  });
+  const matches = useQuery(GET_MATCHES, {
+    pollInterval: process.env.REACT_APP_POLL_INTERVAL
+  });
 
   const plannedMatches = matches.data
     ? matches.data.matches
@@ -111,7 +118,6 @@ const Team = ({ id }) => {
                       <Badge color="primary">założyciel</Badge>
                     )}
                     <Badge id={"won" + u.id} color="warning">
-                      {/* TODO */}
                       <UncontrolledTooltip
                         delay={0}
                         placement="bottom"
