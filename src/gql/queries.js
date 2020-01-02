@@ -89,6 +89,13 @@ export const GET_USER = gql`
           id
         }
       }
+      matches {
+        id
+        isFinished
+        winner {
+          id
+        }
+      }
       leagues {
         id
         name

@@ -39,6 +39,13 @@ const Player = ({ id }) => {
   if (user.loading) {
     return <LoadingBar />;
   }
+
+  const totalMatches = user.data.user.matches.length;
+  const matchesWon = user.data.user.matches.filter(m => m.winner.id === id)
+    .length;
+
+  const matchesPlayed = user.data.user.matches.filter(m => m.isFinished).length;
+
   return (
     <Container className="my-3">
       <section>
@@ -86,7 +93,11 @@ const Player = ({ id }) => {
             </Card>
           </Col>
           <Col sm={4} xs={12}>
-            <Counter icon={faFutbol} size="s" value={35}>
+            <Counter
+              icon={faFutbol}
+              size="s"
+              value={!isNaN(totalMatches) ? totalMatches : "..."}
+            >
               Rozegranych meczów
               <div className="progress-wrapper">
                 <div className="progress-info">
@@ -94,10 +105,13 @@ const Player = ({ id }) => {
                     <span>Wygrane</span>
                   </div>
                   <div className="progress-percentage">
-                    <span>22</span>
+                    <span>{!isNaN(matchesWon) ? matchesWon : "..."}</span>
                   </div>
                 </div>
-                <Progress max="35" value="22" />
+                <Progress
+                  value={!isNaN(matchesWon) ? matchesWon : 0}
+                  max={!isNaN(totalMatches) ? totalMatches : 0}
+                />
               </div>
               <div className="progress-wrapper">
                 <div className="progress-info">
@@ -105,10 +119,13 @@ const Player = ({ id }) => {
                     <span>Rozegrane / zaplanowane </span>
                   </div>
                   <div className="progress-percentage">
-                    <span>41</span>
+                    <span>{!isNaN(matchesPlayed) ? matchesPlayed : "..."}</span>
                   </div>
                 </div>
-                <Progress max="41" value="35" />
+                <Progress
+                  value={!isNaN(matchesPlayed) ? matchesPlayed : 0}
+                  max={!isNaN(totalMatches) ? totalMatches : 0}
+                />
               </div>
             </Counter>
           </Col>
