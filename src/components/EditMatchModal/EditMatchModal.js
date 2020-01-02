@@ -7,18 +7,14 @@ import {
   CardBody,
   Form,
   FormGroup,
-  InputGroup,
   Input,
-  InputGroupAddon,
-  InputGroupText,
   Label
 } from "reactstrap";
-import ReactDatetime from "react-datetime";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useMutation } from "@apollo/react-hooks";
 import ErrorModal from "components/ErrorModal/ErrorModal";
-import { CREATE_MATCH } from "gql/mutations";
 import { GET_LEAGUE } from "gql/queries";
 import { END_MATCH } from "gql/mutations";
 

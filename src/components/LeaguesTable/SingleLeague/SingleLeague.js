@@ -19,16 +19,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./SingleLeague.scss";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_MATCHES_WITHIN_LEAGUE } from "gql/queries";
 
-const SingleLeague = ({
-  name,
-  description,
-  id,
-  users,
-  teams,
-  matches = 5,
-  beers = 0
-}) => {
+const SingleLeague = ({ name, description, id, users, teams }) => {
+  const matches = useQuery(GET_MATCHES_WITHIN_LEAGUE, {
+    variables: { where: { league: { id }, isFinished: true } }
+  });
+
   return (
     <Card className="shadow border-0 mb-3 single-league">
       <CardBody className="py-3">
@@ -60,12 +58,22 @@ const SingleLeague = ({
               <ListGroupItem className="property">
                 <FontAwesomeIcon icon={faFutbol} />
                 <span className="text">Rozegrane mecze</span>
-                <Badge color="primary">{matches}</Badge>
+                <Badge color="primary">
+                  {matches.data ? matches.data.matches.length : "..."}
+                </Badge>
               </ListGroupItem>
               <ListGroupItem className="property">
                 <FontAwesomeIcon icon={faBeer} />
                 <span className="text">Wypite piwa</span>
-                <Badge color="primary">{beers}</Badge>
+                <Badge color="primary">
+                  {matches.data
+                    ? matches.data.matches.length
+                      ? matches.data.matches
+                          .map(m => m.user1points + m.user2points)
+                          .reduce((sum, current) => sum + current)
+                      : 0
+                    : "..."}
+                </Badge>
               </ListGroupItem>
             </ListGroup>
           </Col>
