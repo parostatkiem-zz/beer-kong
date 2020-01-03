@@ -55,6 +55,7 @@ const Player = ({ id }) => {
               icon={faUserAstronaut}
               kind="Gracz"
               value={user.data.user.name}
+              picture={user.data.user.picture}
             >
               <h6>
                 W piwnej społeczności od{" "}
@@ -105,7 +106,11 @@ const Player = ({ id }) => {
                     <span>Wygrane</span>
                   </div>
                   <div className="progress-percentage">
-                    <span>{!isNaN(matchesWon) ? matchesWon : "..."}</span>
+                    <span>
+                      {!isNaN(matchesWon)
+                        ? `${matchesWon}/${totalMatches}`
+                        : "..."}
+                    </span>
                   </div>
                 </div>
                 <Progress
@@ -119,7 +124,11 @@ const Player = ({ id }) => {
                     <span>Rozegrane / zaplanowane </span>
                   </div>
                   <div className="progress-percentage">
-                    <span>{!isNaN(matchesPlayed) ? matchesPlayed : "..."}</span>
+                    <span>
+                      {!isNaN(matchesPlayed)
+                        ? `${matchesPlayed}/${totalMatches}`
+                        : "..."}
+                    </span>
                   </div>
                 </div>
                 <Progress

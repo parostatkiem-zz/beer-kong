@@ -33,7 +33,7 @@ export const GET_LEAGUE = gql`
       teams {
         name
         id
-        points
+
         owner {
           id
         }
@@ -81,6 +81,7 @@ export const GET_USER = gql`
     user(where: { id: $id }) {
       id
       name
+      picture
       createdAt
       teams {
         id
@@ -145,7 +146,9 @@ export const GET_MATCHES = gql`
       id
       plannedAt
       isFinished
+
       user1 {
+        picture
         id
         name
         teams {
@@ -153,6 +156,7 @@ export const GET_MATCHES = gql`
         }
       }
       user2 {
+        picture
         id
         name
         teams {

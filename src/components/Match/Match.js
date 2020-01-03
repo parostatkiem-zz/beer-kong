@@ -17,6 +17,19 @@ import { DELETE_MATCH } from "gql/mutations";
 import { GET_LEAGUE } from "gql/queries";
 import { GET_MATCHES } from "gql/queries";
 
+function PlayerLink({ user }) {
+  return (
+    <Link to={"/player/" + user.id}>
+      <img
+        className="thumbnail"
+        src={user.picture}
+        alt={user.name + "_avatar"}
+      />
+      {user.name}
+    </Link>
+  );
+}
+
 const Match = ({
   user1,
   user2,
@@ -57,13 +70,16 @@ const Match = ({
             { winner: winner && winner.id === user1.id }
           ])}
         >
-          {winner && winner.id === user1.id ? (
-            <FontAwesomeIcon className="trophy" icon={faTrophy} />
-          ) : (
-            <span></span>
-          )}
-          <Link to={"/player/" + user1.id}>{user1.name}</Link>
-          <span className="points">{user1points}</span>
+          <span></span>
+          <PlayerLink user={user1} />
+          <span className="points">
+            {winner && winner.id === user1.id ? (
+              <FontAwesomeIcon className="trophy" icon={faTrophy} />
+            ) : (
+              <span></span>
+            )}
+            {user1points}
+          </span>
         </div>
         <FontAwesomeIcon className="bolt_icon" icon={faBolt} />
         <span className="date">{date}</span>
@@ -83,7 +99,8 @@ const Match = ({
               <span></span>
             )}
           </span>
-          <Link to={"/player/" + user2.id}>{user2.name}</Link>
+          <PlayerLink user={user2} />
+
           <Button
             className="btn-icon btn-2 action-button"
             color="primary"
