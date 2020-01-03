@@ -6,6 +6,7 @@ export const GET_LEAGUES = gql`
       id
       name
       description
+      finishedMatches
       users {
         id
       }
@@ -21,7 +22,7 @@ export const GET_LEAGUE = gql`
       name
       id
       description
-
+      finishedMatches
       users {
         name
       }
@@ -33,7 +34,7 @@ export const GET_LEAGUE = gql`
       teams {
         name
         id
-
+        points
         owner {
           id
         }
@@ -45,6 +46,7 @@ export const GET_LEAGUE = gql`
       users {
         name
         id
+        pointsInLeague(where: { id: $id })
         matches {
           isFinished
           winner {

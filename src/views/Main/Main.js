@@ -75,7 +75,11 @@ export default function Main(props) {
             <LoadingBar />
           </>
         ) : (
-          <LeaguesTable leagues={leagues.data.leagues} />
+          <LeaguesTable
+            leagues={leagues.data.leagues.sort(
+              (a, b) => b.users.length - a.users.length
+            )}
+          />
         )}
       </section>
     </Container>

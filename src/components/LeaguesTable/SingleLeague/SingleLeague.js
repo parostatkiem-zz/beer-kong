@@ -22,7 +22,14 @@ import "./SingleLeague.scss";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_MATCHES } from "gql/queries";
 
-const SingleLeague = ({ name, description, id, users, teams }) => {
+const SingleLeague = ({
+  name,
+  description,
+  id,
+  users,
+  teams,
+  finishedMatches
+}) => {
   const matches = useQuery(GET_MATCHES, {
     pollInterval: process.env.REACT_APP_POLL_INTERVAL,
     variables: { where: { league: { id }, isFinished: true } }
@@ -59,9 +66,7 @@ const SingleLeague = ({ name, description, id, users, teams }) => {
               <ListGroupItem className="property">
                 <FontAwesomeIcon icon={faFutbol} />
                 <span className="text">Rozegrane mecze</span>
-                <Badge color="primary">
-                  {matches.data ? matches.data.matches.length : "..."}
-                </Badge>
+                <Badge color="primary">{finishedMatches}</Badge>
               </ListGroupItem>
               <ListGroupItem className="property">
                 <FontAwesomeIcon icon={faBeer} />

@@ -84,9 +84,11 @@ const League = ({ id }) => {
                 <Counter
                   icon={faFutbol}
                   size="s"
-                  value={matches.data ? matches.data.matches.length : "..."}
+                  value={
+                    league.data ? league.data.league.finishedMatches : "..."
+                  }
                 >
-                  Meczów
+                  Rozegranych meczów
                 </Counter>
               </Col>
               <Col lg={12} sm={4}>
@@ -95,7 +97,7 @@ const League = ({ id }) => {
                   size="s"
                   value={league.data.league.users.length}
                 >
-                  Aktywnych użytkowników
+                  Aktywnych graczy
                 </Counter>
               </Col>
               <Col lg={12} sm={4}>
@@ -128,33 +130,36 @@ const League = ({ id }) => {
                 {userInfo && <AddTeamModal leagueId={id} />}
               </CardHeader>
               <ListGroup>
-                {league.data.league.teams.map(team => (
-                  <ListGroupItem
-                    key={team.name}
-                    tag="a"
-                    href={"/team/" + team.id}
-                    className="justify-content-between d-flex"
-                  >
-                    {userInfo && team.owner.id === userInfo.id ? (
-                      <>
-                        <strong> {team.name}</strong>
-                        <Badge color="primary">założyciel</Badge>
-                      </>
-                    ) : (
-                      <span> {team.name}</span>
-                    )}
-                    <Badge id={team.id} color="warning">
-                      {team.points}
-                    </Badge>
-                    <UncontrolledTooltip
-                      delay={0}
-                      placement="bottom"
-                      target={team.id}
+                {league.data.league.teams
+                  .sort(team => team.points)
+                  .reverse()
+                  .map(team => (
+                    <ListGroupItem
+                      key={team.name}
+                      tag="a"
+                      href={"/team/" + team.id}
+                      className="justify-content-between d-flex"
                     >
-                      Punkty zdobyte przez drużynę
-                    </UncontrolledTooltip>
-                  </ListGroupItem>
-                ))}
+                      {userInfo && team.owner.id === userInfo.id ? (
+                        <>
+                          <strong> {team.name}</strong>
+                          <Badge color="primary">założyciel</Badge>
+                        </>
+                      ) : (
+                        <span> {team.name}</span>
+                      )}
+                      <Badge id={team.id} color="warning">
+                        {team.points}
+                      </Badge>
+                      <UncontrolledTooltip
+                        delay={0}
+                        placement="bottom"
+                        target={team.id}
+                      >
+                        Punkty zdobyte przez drużynę
+                      </UncontrolledTooltip>
+                    </ListGroupItem>
+                  ))}
               </ListGroup>
             </Card>
           </Col>
@@ -165,38 +170,36 @@ const League = ({ id }) => {
         {league.data.league.users.length ? (
           <Card className="shadow border-0 mb-3">
             <ListGroup>
-              {league.data.league.users.map(u => (
-                <ListGroupItem
-                  key={u.id}
-                  className="d-flex justify-content-between"
-                >
-                  <div>
-                    <Link to={"/player/" + u.id}>{u.name}</Link>{" "}
-                    <Link
-                      to={"/team/" + u.teams.find(t => t.league.id === id).id}
-                    >
-                      <Badge color="primary">
-                        {u.teams.find(t => t.league.id === id).name}
-                      </Badge>
-                    </Link>
-                  </div>
-                  <Badge id={"won" + u.id} color="warning">
-                    <UncontrolledTooltip
-                      delay={0}
-                      placement="bottom"
-                      target={"won" + u.id}
-                    >
-                      Ilość wygranych meczów
-                    </UncontrolledTooltip>
-                    <FontAwesomeIcon icon={faTrophy} color="#fb6340" />{" "}
-                    {
-                      u.matches.filter(
-                        m => m.isFinished && m.winner.id === u.id
-                      ).length
-                    }
-                  </Badge>
-                </ListGroupItem>
-              ))}
+              {league.data.league.users
+                .sort((a, b) => b.pointsInLeague - a.pointsInLeague)
+                .map(u => (
+                  <ListGroupItem
+                    key={u.id}
+                    className="d-flex justify-content-between"
+                  >
+                    <div>
+                      <Link to={"/player/" + u.id}>{u.name}</Link>{" "}
+                      <Link
+                        to={"/team/" + u.teams.find(t => t.league.id === id).id}
+                      >
+                        <Badge color="primary">
+                          {u.teams.find(t => t.league.id === id).name}
+                        </Badge>
+                      </Link>
+                    </div>
+                    <Badge id={"won" + u.id} color="warning">
+                      <UncontrolledTooltip
+                        delay={0}
+                        placement="bottom"
+                        target={"won" + u.id}
+                      >
+                        Ilość wygranych meczów
+                      </UncontrolledTooltip>
+                      <FontAwesomeIcon icon={faTrophy} color="#fb6340" />{" "}
+                      {u.pointsInLeague}
+                    </Badge>
+                  </ListGroupItem>
+                ))}
             </ListGroup>
           </Card>
         ) : (
