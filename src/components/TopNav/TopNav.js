@@ -18,6 +18,7 @@ import "./TopNav.scss";
 import { CREATE_USER } from "gql/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import { GET_USER } from "gql/queries";
+import logo from "assets/img/favicon.png";
 
 const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
   !isLoggedIn ? (
@@ -56,7 +57,7 @@ const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
 const TopNav = () => {
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const [createUser] = useMutation(CREATE_USER, {
-    refetchQueries: [GET_USER],
+    refetchQueries: [{ query: GET_USER }],
     onError: console.error,
     onCompleted: data => setUserInfo(data.loginOrRegisterUser)
   });
@@ -90,7 +91,7 @@ const TopNav = () => {
     <Navbar className="navbar-dark bg-primary navbar-horizontal" expand="lg">
       <Container>
         <NavbarBrand href="/">
-          <img className="mr-2" src="favicon.png" alt="" />
+          <img className="mr-2" src={logo} alt="" />
           Beer Kong
         </NavbarBrand>
         <button className="navbar-toggler" id="navbar-default">
@@ -101,7 +102,7 @@ const TopNav = () => {
             <Row>
               <Col className="collapse-brand" xs="6">
                 <Link to="/">
-                  <img className="mr-2" src="favicon.png" alt="" />
+                  <img className="mr-2" src={logo} alt="" />
                   Beer Kong
                 </Link>
               </Col>
