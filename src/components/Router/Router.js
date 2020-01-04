@@ -11,6 +11,7 @@ import TopNav from "components/TopNav/TopNav";
 import Player from "views/Player/Player";
 import Team from "views/Team/Team";
 import { Container } from "reactstrap";
+import Footer from "components/Footer/Footer";
 
 const Router = () => {
   const [userInfo, setUserInfoState] = useState(
@@ -29,28 +30,25 @@ const Router = () => {
       <TopNav />
       <Switch>
         <Route exact path="/" component={Main} />
-
         <Route
           path="/league/:id"
           render={props => <League id={props.match.params.id} />}
         />
-
         <Route
           path="/player/:id"
           render={props => <Player id={props.match.params.id} />}
         />
-
         <Route
           path="/team/:id"
           render={props => <Team id={props.match.params.id} />}
         />
-
         <Route path="*">
           <Container>
             <h1>Chyba zabłądziłeś... 404</h1>
           </Container>
         </Route>
       </Switch>
+      <Footer />
     </UserInfoContext.Provider>
   );
 };

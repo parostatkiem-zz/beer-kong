@@ -62,7 +62,7 @@ export default function Main(props) {
         </Row>
       </section>
 
-      <section className="mt-3">
+      {/* <section className="mt-3">
         <SectionHeader
           title="Najlepsze ligi"
           description="Top 5 najlepszych lig, z mozliwoscią obejrzenia wszystkich"
@@ -81,7 +81,7 @@ export default function Main(props) {
             )}
           />
         )}
-      </section>
+      </section> */}
     </Container>
   );
 }
