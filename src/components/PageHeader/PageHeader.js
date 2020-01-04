@@ -24,7 +24,7 @@ const PageHeader = ({ children, value, icon, kind, actions, picture }) => {
           )}
 
           {picture && (
-            <Col className="picture" lg={{ size: "auto" }}>
+            <Col className="picture" sm={1} lg={{ size: "auto" }}>
               <img src={picture} alt={value} />
             </Col>
           )}
