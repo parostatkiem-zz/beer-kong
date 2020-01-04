@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# How to launch Beer Kong frontend dev server
 
-## Available Scripts
+## Minimal requirements
 
-In the project directory, you can run:
+Aby uruchomić serwer deweloperski z opisywaną stroną internetową, należy spełnić poniższe wymagania sprzętowe i programowe:
 
-### `npm start`
+- One of the following OS: MacOs 10, Linux Debian 9.0 or Windows 7 or a newer version of the above
+- NodeJS 12 enviroment, can be downloaded [HERE](https://nodejs.org/en/download/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Dependencies installation
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+1. Open terminal
+2. Change workdir to the main directory of this repository (the directory where the file `README.md` is in)
+3. Run the following command
 
-### `npm test`
+```shell=bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Starting the dev server
 
-### `npm run build`
+One important launch param of the server is the _backend server url_. There are two options of setting this param:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Using the cloud-hosted backend server
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This option requires an internet connection and, of course, the online backend server must be up and running (which theoreticaly may fail for some reason). On the other hand it's much easier and quicker because you don't have to start the backend on your own.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To launch the frontend dev serwer with cloud-hosted backend, run:
 
-### `npm run eject`
+```shell=bash
+REACT_APP_GQL=https://beer-kong-server.herokuapp.com REACT_APP_POLL_INTERVAL=7000 npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Using the local backend server
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This option does not require an internet connection and is more reliable but takes more time and effort.
+Before you run the following command, please make sure your local backend server is running and is hosted at `localhost:80`. You can find more details in `README.md` file of the backend server.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+To launch the frontend dev serwer with local backend, run:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```shell=bash
+REACT_APP_GQL=localhost:80 REACT_APP_POLL_INTERVAL=7000 npm start
+```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+No matter which path you chose, your browser should open a new tab pointed at `http://localhost:3000` and you should see the orange-themed website. If it did, open [this address](http://localhost:3000) localy.
