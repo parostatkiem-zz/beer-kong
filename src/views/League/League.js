@@ -215,7 +215,16 @@ const League = ({ id }) => {
         ) : matches.data.matches.length ? (
           matches.data.matches
             .filter(m => m.isFinished)
-            .map(m => <Match leagueId={id} key={m.id} {...m} />)
+            .map(m => (
+              <Match
+                canManage={
+                  userInfo && userInfo.id === league.data.league.owner.id
+                }
+                leagueId={id}
+                key={m.id}
+                {...m}
+              />
+            ))
         ) : (
           <NoEntriesInfo>
             W tej lidze odbył się jeszcze żaden mecz
@@ -230,7 +239,16 @@ const League = ({ id }) => {
         ) : matches.data.matches.length ? (
           matches.data.matches
             .filter(m => !m.isFinished)
-            .map(m => <Match leagueId={id} key={m.id} {...m} />)
+            .map(m => (
+              <Match
+                canManage={
+                  userInfo && userInfo.id === league.data.league.owner.id
+                }
+                leagueId={id}
+                key={m.id}
+                {...m}
+              />
+            ))
         ) : (
           <NoEntriesInfo>
             W tej lidze odbył się jeszcze żaden mecz

@@ -48,8 +48,9 @@ const Team = ({ id }) => {
     ? matches.data.matches
         .filter(
           m =>
-            (!m.isFinished && m.user1.teams.some(t => t.id === id)) ||
-            m.user2.teams.some(t => t.id === id)
+            !m.isFinished &&
+            (m.user1.teams.some(t => t.id === id) ||
+              m.user2.teams.some(t => t.id === id))
         )
         .map(m => <Match leagueId={id} key={m.id} {...m} />)
     : [];

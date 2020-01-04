@@ -35,7 +35,8 @@ const Match = ({
   user2points,
   isFinished,
   leagueId,
-  id
+  id,
+  canManage = false
 }) => {
   const date = useDate(plannedAt);
   const [deleteMatch] = useMutation(DELETE_MATCH, {
@@ -97,19 +98,25 @@ const Match = ({
           </span>
           <PlayerLink user={user2} />
 
-          <Button
-            className="btn-icon btn-2 action-button"
-            color="primary"
-            type="button"
-            size="sm"
-            onClick={() =>
-              isFinished ? handleMatchDelete() : setShowEditModal(true)
-            }
-          >
-            <span className="btn-inner--icon">
-              <FontAwesomeIcon icon={isFinished ? faTrash : faFlagCheckered} />
-            </span>
-          </Button>
+          {canManage ? (
+            <Button
+              className="btn-icon btn-2 action-button"
+              color="primary"
+              type="button"
+              size="sm"
+              onClick={() =>
+                isFinished ? handleMatchDelete() : setShowEditModal(true)
+              }
+            >
+              <span className="btn-inner--icon">
+                <FontAwesomeIcon
+                  icon={isFinished ? faTrash : faFlagCheckered}
+                />
+              </span>
+            </Button>
+          ) : (
+            <span></span>
+          )}
         </div>
       </Jumbotron>
       <EditMatchModal
