@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import "./TopNav.scss";
 import { CREATE_USER } from "gql/mutations";
 import { useMutation } from "@apollo/react-hooks";
+import { GET_USER } from "gql/queries";
 
 const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
   !isLoggedIn ? (
@@ -55,7 +56,7 @@ const LoginLogoutButtons = ({ clientId, isLoggedIn, onLogout, onResponse }) =>
 const TopNav = () => {
   const { userInfo, setUserInfo } = useContext(UserInfoContext);
   const [createUser] = useMutation(CREATE_USER, {
-    // refetchQueries: [GET_LEAGUES],
+    refetchQueries: [GET_USER],
     onError: console.error,
     onCompleted: data => setUserInfo(data.loginOrRegisterUser)
   });
@@ -77,7 +78,6 @@ const TopNav = () => {
       }
     });
 
-    // setUserInfo(resp.error ? null : resp);
     sessionStorage.setItem("token", resp.tokenId);
   }
 
@@ -89,21 +89,20 @@ const TopNav = () => {
   return (
     <Navbar className="navbar-dark bg-primary navbar-horizontal" expand="lg">
       <Container>
-        <NavbarBrand href="/">Beer Kong</NavbarBrand>
-
+        <NavbarBrand href="/">
+          <img className="mr-2" src="favicon.png" alt="" />
+          Beer Kong
+        </NavbarBrand>
         <button className="navbar-toggler" id="navbar-default">
           <span className="navbar-toggler-icon" />
         </button>
-
         <UncontrolledCollapse navbar toggler="#navbar-default">
           <div className="navbar-collapse-header">
             <Row>
               <Col className="collapse-brand" xs="6">
                 <Link to="/">
-                  <img
-                    alt="..."
-                    src={require("assets/img/brand/argon-react.png")}
-                  />
+                  <img className="mr-2" src="favicon.png" alt="" />
+                  Beer Kong
                 </Link>
               </Col>
               <Col className="collapse-close" xs="6">
