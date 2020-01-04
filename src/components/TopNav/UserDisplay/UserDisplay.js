@@ -4,7 +4,7 @@ import "./UserDisplay.scss";
 import { Button } from "reactstrap";
 
 const UserDisplay = ({ picture, name, id }) => (
-  <div className="user-display">
+  <div className="user-display ">
     <Link to={"/player/" + id}>
       <img className="user-display__img" src={picture} alt="" />
       <Button

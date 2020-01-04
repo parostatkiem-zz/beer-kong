@@ -6,3 +6,13 @@
 .modal-backdrop.show {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 990px) {
+  .navbar-collapse {
+    .nav-item:not(:last-child) {
+      padding-bottom: 0.5em;
+      margin-bottom: 0.5em;
+      border-bottom: 1px solid #e9ecef;
+    }
+  }
+}

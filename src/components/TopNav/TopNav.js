@@ -64,7 +64,8 @@ const TopNav = () => {
 
   function responseGoogle(resp) {
     if (resp.error) {
-      console.error("Could not log in");
+      alert("Logowanie nie powiodło się. Spróbuj ponownie.");
+      console.error(resp.error);
       return;
     }
 

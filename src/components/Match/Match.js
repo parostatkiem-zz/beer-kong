@@ -20,11 +20,7 @@ import { GET_MATCHES } from "gql/queries";
 function PlayerLink({ user }) {
   return (
     <Link to={"/player/" + user.id}>
-      <img
-        className="thumbnail"
-        src={user.picture}
-        alt={user.name + "_avatar"}
-      />
+      <img className="thumbnail" src={user.picture} alt={" "} />
       {user.name}
     </Link>
   );

@@ -45,7 +45,7 @@ const SingleLeague = ({
             </Link>
             <p className=" description mt-3">{description}</p>
             <Link to={"/league/" + id}>
-              <Button className="mt-2" color="primary">
+              <Button className="my-2" color="primary">
                 Zobacz więcej
               </Button>
             </Link>

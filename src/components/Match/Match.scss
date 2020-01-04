@@ -6,8 +6,9 @@
   overflow: visible;
   position: relative;
 
-  &>span {
+  & > span {
     display: inline-block;
+
     font-size: 1.2em;
   }
 
@@ -26,6 +27,11 @@
       font-size: 1px;
       width: 0;
       height: 0;
+      @media screen and (max-width: 768px) {
+        & {
+          font-size: 0.7em;
+        }
+      }
     }
 
     .action-button {
@@ -85,6 +91,11 @@
     $innerPadding: 2em;
 
     .points {
+      @media screen and (max-width: 768px) {
+        & {
+          font-size: 1.2em;
+        }
+      }
       font-size: 2em;
       line-height: normal;
 
@@ -112,7 +123,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    @media screen and (max-width: 768px) {
+      & {
+        font-size: 0.9em;
+      }
+    }
     &.winner {
       background-color: #5e72e4;
       color: white;

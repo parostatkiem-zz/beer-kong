@@ -102,7 +102,7 @@ const AddMatchModal = ({ leagueId, usersToChoseFrom = [] }) => {
     <>
       {errorMessage && <ErrorModal text={errorMessage} />}
       <Button
-        className="btn-icon"
+        className="btn-icon mb-2"
         block
         color="primary"
         type="button"
