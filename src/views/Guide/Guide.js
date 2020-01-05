@@ -12,7 +12,7 @@ const Guide = () => {
                 />
                 <SectionHeader
                 title="Ligi"
-                description="Główną funkcjonalnością aplikacji są ligi, które w swoim obrębie gromadzą użytkowników i zakładane przez nich drużyny. Kada liga posiada swoją unikatową nazwę, oraz opis, który powinien zawierać wprowadzenie dla nowych graczy oraz zbiór zasad."
+                description="Główną funkcjonalnością aplikacji są ligi, które w swoim obrębie gromadzą użytkowników i zakładane przez nich drużyny. Każda liga posiada swoją unikatową nazwę oraz opis, który powinien zawierać wprowadzenie dla nowych graczy oraz zbiór zasad."
                 />
                 <SectionHeader
                 title="Drużyny"
@@ -20,7 +20,7 @@ const Guide = () => {
                 />
                 <SectionHeader
                 title="Mecze"
-                description="Mecze są najważniejszym aspektem każdej ligi. Są one planowane i wypełniane przez założyciela ligi, który powinien dopilnować, aby każdy mecz, który odbędzie się w rzeczywistości, został przeprowadzony zgodnie z zasadami ligi, a punkty przydzielone poprawnie i jednoznacznie."
+                description="Mecze są najważniejszym aspektem każdej ligi. Są one planowane i prowadzone przez założyciela ligi. Powinien on dopilnować, aby każdy mecz, który odbędzie się w rzeczywistości, został przeprowadzony zgodnie z zasadami ligi, a punkty przydzielone poprawnie i jednoznacznie."
                 />
             </section>
         </Container>
