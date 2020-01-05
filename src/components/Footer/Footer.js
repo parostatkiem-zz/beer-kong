@@ -17,8 +17,17 @@ export default function Footer() {
             <Col md="6">
               <Nav className=" nav-footer justify-content-end">
                 <NavItem>
-                  <NavLink href="#" target="_blank">
-                    Zasady
+                  <NavLink href="/aboutgame" target="_blank">
+                    O Grze
+                  </NavLink>
+                  <NavLink href="/guide" target="_blank">
+                    Przewodnik
+                  </NavLink>
+                  <NavLink href="https://github.com/parostatkiem/beer-kong" target="_blank">
+                    Źródło Strony
+                  </NavLink>
+                  <NavLink href="https://github.com/pPrecel/BeerKongServer" target="_blank">
+                    Źródło Serwera
                   </NavLink>
                 </NavItem>
               </Nav>
