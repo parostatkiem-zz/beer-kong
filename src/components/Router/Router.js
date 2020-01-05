@@ -5,6 +5,8 @@ import Main from "views/Main/Main.js";
 // import Footer from "components/Footer/Footer";
 // import Profile from "views/Profile/Profile";
 import League from "../../views/League/League";
+import Guide from "../../views/Guide/Guide";
+import AboutGame from "../../views/AboutGame/AboutGame";
 
 import UserInfoContext from "contexts/UserInfoContext/UserInfo.context";
 import TopNav from "components/TopNav/TopNav";
@@ -30,6 +32,8 @@ const Router = () => {
       <TopNav />
       <Switch>
         <Route exact path="/" component={Main} />
+        <Route exact path="/aboutgame" component={AboutGame} />
+        <Route exact path="/guide" component={Guide} />
         <Route
           path="/league/:id"
           render={props => <League id={props.match.params.id} />}
