@@ -8,15 +8,15 @@ const Guide = () => {
             <section className="mt-3">
                 <SectionHeader
                 title="Użytkownik"
-                description="Użytkownikiem jest każda osoba, która kliknęła w przycisk „ZALOGUJ SIĘ”, w prawym górnym rogu ekranu, oraz przy pomocy Konta Google zalogowała się do naszego serwisu. Serwis nie przechowuje żadnych danych użytkownika poza zdjęciem profilowym i nazwą co sprawia, że każda zmiana konta Google powoduje zmianę danych użytkownika w naszym serwisie. Każdy użytkownik ma możliwość zakładania lig oraz drużyn"
+                description="Użytkownikiem jest każda osoba, która kliknęła w przycisk „ZALOGUJ SIĘ”, w prawym górnym rogu ekranu, oraz przy pomocy Konta Google zalogowała się do naszego serwisu. Serwis nie przechowuje żadnych danych użytkownika poza zdjęciem profilowym i nazwą co sprawia, że każda zmiana wprowadzona w koncie Google (jak avatar, czy nazwa) powoduje zmianę danych użytkownika w naszym serwisie. Każdy Zalogowany Uytkownik ma możliwość zakładania lig oraz drużyn"
                 />
                 <SectionHeader
                 title="Ligi"
-                description="Główną funkcjonalnością aplikacji są ligi, które w swoim obrębie gromadzą użytkowników i zakładane przez nich drużyny, Założyciele lig mogą rozgrywać mecze zgodnie z zasadami opisanymi w lidze. Sprawia to, że każda liga powinna mieć unikalne zasady na tle innych lig."
+                description="Główną funkcjonalnością aplikacji są ligi, które w swoim obrębie gromadzą użytkowników i zakładane przez nich drużyny. Kada liga posiada swoją unikatową nazwę, oraz opis, który powinien zawierać wprowadzenie dla nowych graczy oraz zbiór zasad."
                 />
                 <SectionHeader
                 title="Drużyny"
-                description="Drużyny zakładają użytkownicy, którzy wykazują chęć wzięcia udziału w meczach według zasad prowadzonych przez ligę. Każdy założyciel drużyny może dodawać kolejnych użytkowników do swojej ligi, spośród których jeden może zostać wybrany do rozegrania meczu rankingowego, który założył założyciel ligi. W ten sposób użytkownicy zbierają punkty na poczet swojej drużyny."
+                description="Drużyny zakładają użytkownicy, którzy wykazują chęć wzięcia udziału w meczach według zasad prowadzonych przez ligę. Każdy założyciel może dodawać kolejnych użytkowników do drużyny, spośród których jeden może zostać wybrany do rozegrania meczu rankingowego. W ten sposób użytkownicy zbierają punkty na poczet swojej drużyny."
                 />
                 <SectionHeader
                 title="Mecze"
