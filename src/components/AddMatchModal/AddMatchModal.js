@@ -72,7 +72,7 @@ const AddMatchModal = ({ leagueId, usersToChoseFrom = [] }) => {
     (usersToChoseFrom.length && usersToChoseFrom[0].id) || null
   );
   const [user2, setUser2] = useState(
-    (usersToChoseFrom.length && usersToChoseFrom[1].id) || null
+    (usersToChoseFrom.length >= 2 && usersToChoseFrom[1].id) || null
   );
 
   const formElement = useRef(null);

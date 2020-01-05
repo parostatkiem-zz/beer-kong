@@ -46,11 +46,12 @@ const Team = ({ id }) => {
 
   const plannedMatches = matches.data
     ? matches.data.matches
-        .filter(
-          m =>
-            !m.isFinished &&
-            (m.user1.teams.some(t => t.id === id) ||
-              m.user2.teams.some(t => t.id === id))
+        .filter(m =>
+          !m.isFinished && m.league.id === team.data
+            ? team.data.team.league.id
+            : null &&
+              (m.user1.teams.some(t => t.id === id) ||
+                m.user2.teams.some(t => t.id === id))
         )
         .map(m => <Match leagueId={id} key={m.id} {...m} />)
     : [];

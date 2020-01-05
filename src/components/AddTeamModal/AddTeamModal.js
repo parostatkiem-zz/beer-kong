@@ -110,7 +110,7 @@ const AddTeamModal = ({ leagueId }) => {
                     <Input
                       innerRef={formValues.description}
                       id="exampleFormControlTextarea1"
-                      placeholder="Opis, zasady ..."
+                      placeholder="Opis"
                       rows="3"
                       type="textarea"
                       className="form-control-alternative"

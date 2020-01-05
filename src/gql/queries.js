@@ -170,6 +170,9 @@ export const GET_MATCHES = gql`
       winner {
         id
       }
+      league {
+        id
+      }
     }
   }
 `;
