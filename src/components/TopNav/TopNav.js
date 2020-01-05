@@ -95,12 +95,7 @@ const TopNav = () => {
           <img className="mr-2" src={logo} alt="" />
           Beer Kong
         </NavbarBrand>
-        <NavbarBrand href="/aboutgame">
-          O grze
-        </NavbarBrand>
-        <NavbarBrand href="/guide">
-          Przewodnik
-        </NavbarBrand>
+
         <button className="navbar-toggler" id="navbar-default">
           <span className="navbar-toggler-icon" />
         </button>
@@ -123,6 +118,12 @@ const TopNav = () => {
           </div>
           <Nav className="ml-lg-auto" navbar>
             <NavItem>{userInfo && <UserDisplay {...userInfo} />}</NavItem>
+            <NavItem>
+              <Button href="/aboutgame">O grze</Button>
+            </NavItem>
+            <NavItem>
+              <Button href="/guide">Przewodnik</Button>
+            </NavItem>
             <NavItem>
               <LoginLogoutButtons
                 onResponse={responseGoogle}

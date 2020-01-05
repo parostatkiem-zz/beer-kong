@@ -15,18 +15,24 @@ export default function Footer() {
               </div>
             </Col>
             <Col md="6">
-              <Nav className=" nav-footer justify-content-end">
+              <Nav className=" justify-content-end">
                 <NavItem>
-                  <NavLink href="/aboutgame" target="_blank">
+                  <NavLink className="d-inline" href="/aboutgame">
                     O Grze
                   </NavLink>
-                  <NavLink href="/guide" target="_blank">
+                  <NavLink className="d-inline" href="/guide">
                     Przewodnik
                   </NavLink>
-                  <NavLink href="https://github.com/parostatkiem/beer-kong" target="_blank">
+                  <NavLink
+                    className="d-inline"
+                    href="https://github.com/parostatkiem/beer-kong"
+                  >
                     Źródło Strony
                   </NavLink>
-                  <NavLink href="https://github.com/pPrecel/BeerKongServer" target="_blank">
+                  <NavLink
+                    className="d-inline"
+                    href="https://github.com/pPrecel/BeerKongServer"
+                  >
                     Źródło Serwera
                   </NavLink>
                 </NavItem>
