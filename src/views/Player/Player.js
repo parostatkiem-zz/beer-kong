@@ -41,8 +41,9 @@ const Player = ({ id }) => {
   }
 
   const totalMatches = user.data.user.matches.length;
-  const matchesWon = user.data.user.matches.filter(m => m.winner.id === id)
-    .length;
+  const matchesWon = user.data.user.matches.filter(
+    m => m.isFinished && m.winner && m.winner.id === id
+  ).length;
 
   const matchesPlayed = user.data.user.matches.filter(m => m.isFinished).length;
 
