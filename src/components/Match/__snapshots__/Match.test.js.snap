@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Match Renders user links with thumbnails 1`] = `
+Array [
+  <a
+    href="/player/1"
+  >
+    <img
+      alt=" "
+      class="thumbnail"
+      src="user1picture"
+    />
+    user1
+  </a>,
+  <a
+    href="/player/2"
+  >
+    <img
+      alt=" "
+      class="thumbnail"
+      src="user2picture"
+    />
+    user2
+  </a>,
+]
+`;

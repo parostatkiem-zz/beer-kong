@@ -8,7 +8,7 @@ export default function LoadingBar() {
   return (
     <Row className="justify-content-md-center loading-bar">
       <Col lg={{ size: "auto" }}>
-        <FontAwesomeIcon icon={faSpinner} />
+        <FontAwesomeIcon aria-label="loading-spinner" icon={faSpinner} />
       </Col>
     </Row>
   );

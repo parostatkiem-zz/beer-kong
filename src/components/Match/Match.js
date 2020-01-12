@@ -69,9 +69,13 @@ const Match = ({
         >
           <span></span>
           <PlayerLink user={user1} />
-          <span className="points">
+          <span aria-label="user-one-points" className="points">
             {winner && winner.id === user1.id ? (
-              <FontAwesomeIcon className="trophy" icon={faTrophy} />
+              <FontAwesomeIcon
+                aria-label="trophy"
+                className="trophy"
+                icon={faTrophy}
+              />
             ) : (
               <span></span>
             )}
@@ -88,10 +92,14 @@ const Match = ({
             { winner: winner && winner.id === user2.id }
           ])}
         >
-          <span className="points">
+          <span aria-label="user-two-points" className="points">
             {user2points}
             {winner && winner.id === user2.id ? (
-              <FontAwesomeIcon className="trophy" icon={faTrophy} />
+              <FontAwesomeIcon
+                aria-label="trophy"
+                className="trophy"
+                icon={faTrophy}
+              />
             ) : (
               <span></span>
             )}
