@@ -24,14 +24,16 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = sessionStorage.getItem("token") || null;
-
-  return {
-    headers: {
-      ...headers,
-      Authorization: `${token}`
-      // "Content-Type": "application/json"
-    }
-  };
+  console.log("tlen", token && token.length);
+  return token
+    ? {
+        headers: {
+          ...headers,
+          Authorization: `${token}`
+          // "Content-Type": "application/json"
+        }
+      }
+    : headers;
 });
 
 const client = new ApolloClient({
