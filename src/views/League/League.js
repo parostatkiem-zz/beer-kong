@@ -227,7 +227,7 @@ const League = ({ id }) => {
             ))
         ) : (
           <NoEntriesInfo>
-            W tej lidze odbył się jeszcze żaden mecz
+            W tej lidze nie odbył się jeszcze żaden mecz
           </NoEntriesInfo>
         )}
       </section>
@@ -251,7 +251,7 @@ const League = ({ id }) => {
             ))
         ) : (
           <NoEntriesInfo>
-            W tej lidze odbył się jeszcze żaden mecz
+            W tej lidze nie odbył się jeszcze żaden mecz
           </NoEntriesInfo>
         )}
       </section>
