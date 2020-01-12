@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Counter from "../../components/Counter/Counter";
 import {
   Container,
@@ -35,6 +35,7 @@ import { GET_MATCHES } from "gql/queries";
 import NoEntriesInfo from "components/NoEntriesInfo/NoEntriesInfo";
 
 const League = ({ id }) => {
+  const [hasAddedTeam, setAddedTeam] = useState(false);
   const league = useQuery(GET_LEAGUE, {
     pollInterval: process.env.REACT_APP_POLL_INTERVAL,
     variables: { id }
@@ -45,6 +46,17 @@ const League = ({ id }) => {
   });
   const createdAt = useDate(league.data ? league.data.league.createdAt : 0);
   const { userInfo } = useContext(UserInfoContext);
+
+  useEffect(() => {
+    if (!league.data) {
+      return;
+    }
+
+    setAddedTeam(
+      league.data.league.teams.some(t => t.owner.id === userInfo.id)
+    );
+  }, [league.data, setAddedTeam, userInfo]);
+
   if (league.error) {
     return <ErrorModal text={league.error.message} />;
   }
@@ -127,7 +139,7 @@ const League = ({ id }) => {
                   <FontAwesomeIcon icon={faUsers} color="#fb6340" /> Ranking
                   drużyn
                 </h5>
-                {userInfo && <AddTeamModal leagueId={id} />}
+                {userInfo && !hasAddedTeam && <AddTeamModal leagueId={id} />}
               </CardHeader>
               <ListGroup>
                 {league.data.league.teams
@@ -180,10 +192,13 @@ const League = ({ id }) => {
                     <div>
                       <Link to={"/player/" + u.id}>{u.name}</Link>{" "}
                       <Link
-                        to={"/team/" + u.teams.find(t => t.league.id === id).id}
+                        to={
+                          "/team/" +
+                          (u.teams.find(t => t.league.id === id) || {}).id
+                        }
                       >
                         <Badge color="primary">
-                          {u.teams.find(t => t.league.id === id).name}
+                          {(u.teams.find(t => t.league.id === id) || {}).name}
                         </Badge>
                       </Link>
                     </div>
