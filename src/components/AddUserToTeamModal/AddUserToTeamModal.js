@@ -30,7 +30,7 @@ const UserSelector = ({
     return (
       u.id !== userToExclude &&
       u.name.match(new RegExp(search, "i")) &&
-      !u.leagues.some(l => (l.id = leagueId))
+      !u.leagues.some(l => l.id === leagueId)
     );
   }
   return (
