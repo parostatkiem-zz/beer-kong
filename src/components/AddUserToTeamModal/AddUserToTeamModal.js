@@ -23,7 +23,8 @@ const UserSelector = ({
   setUserFn,
   label,
   userToExclude,
-  leagueId
+  leagueId,
+  user1
 }) => {
   const [search, setSearch] = useState("");
   function canUserBeAdded(u) {
@@ -32,6 +33,15 @@ const UserSelector = ({
       u.name.match(new RegExp(search, "i")) &&
       !u.leagues.some(l => l.id === leagueId)
     );
+  }
+
+  const userToSet = allUsers.filter(canUserBeAdded)
+    ? allUsers.filter(canUserBeAdded)[0]
+    : null;
+  if (userToSet === null) {
+    setUserFn(null);
+  } else if (user1 && user1.id !== userToSet) {
+    setUserFn(userToSet.id);
   }
   return (
     <>
@@ -140,6 +150,7 @@ const AddUserToTeamModal = ({ teamId, leagueId, usersToChoseFrom }) => {
                     setUserFn={setUser1}
                     allUsers={usersToChoseFrom}
                     leagueId={leagueId}
+                    user1={user1}
                   />
                 </FormGroup>
 
