@@ -48,7 +48,7 @@ const League = ({ id }) => {
   const { userInfo } = useContext(UserInfoContext);
 
   useEffect(() => {
-    if (!league.data) {
+    if (!league.data || !userInfo) {
       return;
     }
 
